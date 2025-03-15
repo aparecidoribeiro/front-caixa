@@ -21,12 +21,14 @@ const Login = () => {
                     <div className="text-left w-full max-w-[300px]">
                         <AuthLink
                             text={'Esqueci senha?'}
-                            route={'/'}
+                            route={'/reset'}
                         />
                     </div>
-                    <Button
-                        text={'Continuar'}
-                    />
+                    <div className="w-full mt-2">
+                        <Button
+                            text={'Continuar'}
+                        />
+                    </div>
                     <div className="text-xs flex flex-row gap-[2px]">
                         Não tenho conta?
                         <AuthLink
