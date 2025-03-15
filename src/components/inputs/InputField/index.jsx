@@ -1,14 +1,27 @@
-
+import { Eye, EyeClosed } from 'lucide-react';
+import { useState } from 'react';
 
 const InputField = ({ label, type, placeholder }) => {
+
+    const [showPassword, setShowPassword] = useState(false)
+
     return (
-        <div className="flex flex-col w-full max-w-[300px]">
+        <div className="relative flex flex-col w-full max-w-[300px]">
             <label>{label}</label>
-            <input
-                className="border-standard border-black-one rounded-standard px-3 py-1 focus:outline-none placeholder-black-one text-sm"
-                type={type}
-                placeholder={placeholder}
-            />
+            <span className='flex items-center'>
+                <input
+                    className="w-full border-standard border-black-one rounded px-3 py-1  focus:outline-none placeholder-black-one text-sm"
+                    type={type == "password" ? showPassword ? "text" : "password" : ''}
+                    placeholder={placeholder}
+                />
+                <button
+                    className='absolute right-3'
+                    onClick={() => setShowPassword(!showPassword)}
+                >
+                    {type == "password" ? showPassword == true ? <Eye size={20} /> : <EyeClosed size={20} /> : ''}
+                </button>
+            </span>
+
         </div>
     )
 }

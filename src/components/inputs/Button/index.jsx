@@ -1,9 +1,11 @@
 
 
-const Button = () => {
+const Button = ({ text }) => {
     return (
         <>
-            Button
+            <button className="w-full py-1 bg-primary text-white rounded text-lg font-normal mt-2 max-w-[300px]">
+                {text}
+            </button>
         </>
     )
 }

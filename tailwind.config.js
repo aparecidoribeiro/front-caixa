@@ -9,7 +9,8 @@ export default {
       colors: {
         'background': '#F7F7F7',
         'black-one': '#393A3E',
-        'primary': '#FA9B2F'
+        'primary': '#FA9B2F',
+        'white': '#FFF',
       },
       padding: {
         'standard': '20px',
