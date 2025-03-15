@@ -1,9 +1,11 @@
-import RoutesApp from "./routes/routes"
+import { Outlet } from "react-router-dom"
 
 function App() {
   return (
     <>
-      <RoutesApp />
+      <h1>Haeder</h1>
+      <Outlet />
+      <h1>Menu</h1>
     </>
   )
 }

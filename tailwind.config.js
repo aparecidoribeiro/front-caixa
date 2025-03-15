@@ -8,7 +8,8 @@ export default {
     extend: {
       colors: {
         'background': '#F7F7F7',
-        'black-one': '#393A3E'
+        'black-one': '#393A3E',
+        'primary': '#FA9B2F'
       },
       padding: {
         'standard': '20px',
