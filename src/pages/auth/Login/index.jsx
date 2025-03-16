@@ -1,8 +1,32 @@
+import { useState } from "react"
 import Button from "../../../components/inputs/Button"
 import InputField from "../../../components/inputs/InputField"
 import AuthLink from "../../../components/links/AuthLink"
+import api from "../../../services/api"
 
 const Login = () => {
+
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+
+    const loginUser = async (e) => {
+        await api({
+            method: 'post',
+            url: 'auth/login',
+            data: {
+                email: email,
+                password: password
+            }
+        }).then((response) => {
+            console.log("Usuário logado com sucesso!")
+        }).catch((error) => {
+            console.log(error.response.data.error)
+        }).finally(() => {
+            setEmail('')
+            setPassword('')
+        })
+    }
+
     return (
         <section className="min-h-screen flex items-center">
             <div className="w-full flex-col justify-center">
@@ -12,11 +36,15 @@ const Login = () => {
                         label={'Email'}
                         type={'email'}
                         placeholder={'Digite seu email'}
+                        value={email}
+                        action={setEmail}
                     />
                     <InputField
                         label={'Senha'}
                         type={'password'}
                         placeholder={'Digite sua senha'}
+                        value={password}
+                        action={setPassword}
                     />
                     <div className="text-left w-full max-w-[300px]">
                         <AuthLink
@@ -24,8 +52,9 @@ const Login = () => {
                             route={'/reset'}
                         />
                     </div>
-                    <div className="w-full mt-2">
+                    <div className="w-full max-w-[300px] mt-2">
                         <Button
+                            action={() => { loginUser() }}
                             text={'Continuar'}
                         />
                     </div>

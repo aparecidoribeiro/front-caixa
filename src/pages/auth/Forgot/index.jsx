@@ -13,7 +13,7 @@ const Forgot = () => {
                         type={'email'}
                         placeholder={'Digite seu email'}
                     />
-                    <div className="w-full mt-2">
+                    <div className="w-full max-w-[300px] mt-2">
                         <Button
                             text={'Continuar'}
                         />
