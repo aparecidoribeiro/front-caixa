@@ -10,78 +10,96 @@ const Register = () => {
 
     const [loading, setLoagind] = useState(false)
 
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
-    const [passwordConfirmartion, setPasswordConfirmartion] = useState()
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        password: "",
+        passwordConfirmation: ""
+    })
 
-
-    const resgisterUser = async () => {
-        if (verificarSenha()) {
-            toast.error("As senhas não são iguais")
-        } else {
-            setLoagind(true)
-
-            await api({
-                method: 'post',
-                url: 'auth/register',
-                data: {
-                    name: name,
-                    email: email,
-                    password: password,
-                    password_confirmartion: passwordConfirmartion
-                }
-            }).then((response) => console.log(response))
-                .catch((erros) => console.log(erros)).finally(() => setLoagind(false))
-        }
-    }
-
-    const verificarSenha = () => {
-        if (password != passwordConfirmartion) {
+    const verifyPassword = () => {
+        if (formData.password != formData.passwordConfirmation) {
             return true
         }
     }
 
-    if (loading) {
-        return <LoadinBlock />
+    const validateInputs = () => {
+        const arrayDate = Object.values(formData)
+        return arrayDate.some((value) => value.trim() == "")
     }
+
+    const resgisterUser = async (e) => {
+        e.preventDefault()
+
+        if (validateInputs() == true) {
+            toast.error("Preencha todos os campos")
+        }
+        else if (verifyPassword() == true) {
+            toast.error("As senhas não coincidem")
+        }
+        else {
+            setLoagind(true)
+            await api({
+                method: 'post',
+                url: 'auth/register',
+                data: {
+                    name: formData.name,
+                    email: formData.email,
+                    password: formData.password,
+                    password_confirmation: formData.passwordConfirmation
+                }
+            }).then((response) => {
+                console.log(response)
+                // toast.success("Certo")
+            }).catch((error) => {
+                console.log(error)
+                // toast.error(error.response.data.error)
+            }).finally(() => {
+                setLoagind(false)
+            })
+        }
+    }
+
     return (
         <section className="min-h-screen flex items-center">
-            <div className="w-full flex-col justify-center">
+            <form onSubmit={resgisterUser} className="w-full flex-col justify-center">
                 <h1 className="text-center text-3xl font-medium mb-2">Criar conta</h1>
                 <div className="flex flex-col gap-2 items-center">
                     <InputField
                         label={'Nome'}
                         type={'text'}
                         placeholder={'Nome completo'}
-                        value={name}
-                        action={setName}
+                        value={formData.name}
+                        action={setFormData}
+                        name={'name'}
                     />
                     <InputField
                         label={'Email'}
                         type={'email'}
                         placeholder={'Digite sue email'}
-                        value={email}
-                        action={setEmail}
+                        value={formData.email}
+                        action={setFormData}
+                        name={'email'}
                     />
                     <InputField
                         label={'Senha'}
                         type={'password'}
                         placeholder={'Digite sua senha'}
-                        value={password}
-                        action={setPassword}
+                        value={formData.password}
+                        action={setFormData}
+                        name={'password'}
                     />
                     <InputField
                         label={'Confirmar senha'}
                         type={'password'}
                         placeholder={'Confirme sua senha'}
-                        value={passwordConfirmartion}
-                        action={setPasswordConfirmartion}
+                        value={formData.passwordConfirmation}
+                        action={setFormData}
+                        name={'passwordConfirmation'}
                     />
                     <div className="w-full max-w-[300px] mt-2">
                         <Button
                             text={'Continuar'}
-                            action={() => resgisterUser()}
                         />
                     </div>
                     <div className="text-xs flex flex-row gap-[2px]">
@@ -92,7 +110,10 @@ const Register = () => {
                         />
                     </div>
                 </div>
-            </div>
+            </form>
+            {loading && (
+                <LoadinBlock />
+            )}
         </section >
     )
 }

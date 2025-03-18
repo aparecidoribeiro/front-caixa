@@ -1,74 +1,89 @@
 import { useState } from "react"
+import { toast } from "react-toastify"
 import Button from "@components/inputs/Button"
 import InputField from "@components/inputs/InputField"
 import AuthLink from "@components/links/AuthLink"
 import api from "@services/api"
 import LoadinBlock from "@components/alerts/LoadinBlock"
-import { toast } from "react-toastify"
+import useNavigation from "@hooks/useNavigation"
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
 
+
+    const { goHome } = useNavigation()
+    const nav = useNavigate()
+
     const [loading, setLoagind] = useState(false)
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+    const [formData, setFormData] = useState({
+        email: "",
+        password: ""
+    })
+
+    const validateInputs = () => {
+        if (!formData.email.trim() || !formData.password.trim()) {
+            return true
+        }
+    }
 
     const loginUser = async (e) => {
+        e.preventDefault();
 
         setLoagind(true)
-
-        await api({
-            method: 'post',
-            url: 'auth/login',
-            data: {
-                email: email,
-                password: password
-            }
-
-        }).then((response) => {
-            console.log(response)
-            toast.success('Login')
-        }).catch((error) => {
-            console.log(error.response.data.error)
-            toast.error('Error')
-        }).finally(() => {
-            setEmail('')
-            setPassword('')
+        if (validateInputs()) {
+            toast.error("Preencha todos os campos")
             setLoagind(false)
-        })
+        } else {
+            await api({
+                method: 'post',
+                url: 'auth/login',
+                data: {
+                    email: formData.email,
+                    password: formData.password
+                }
+
+            }).then((response) => {
+                nav('/')
+                console.log(response)
+            }).catch((erro) => {
+                // toast.error('Email ou senha incorreto')
+                console.log(erro)
+            }).finally(() => {
+                setFormData({ email: "", password: "" })
+                setLoagind(false)
+            })
+        }
     }
 
-
-    if (loading) {
-        return <LoadinBlock />
-    }
     return (
         <section className="min-h-screen flex items-center">
             <div className="w-full flex-col justify-center">
                 <h1 className="text-center text-3xl font-medium mb-2">Fazer login</h1>
-                <div className="flex flex-col gap-2 items-center">
+                <form onSubmit={loginUser} className="flex flex-col gap-2 items-center">
                     <InputField
                         label={'Email'}
                         type={'email'}
                         placeholder={'Digite seu email'}
-                        value={email}
-                        action={setEmail}
+                        value={formData.email}
+                        action={setFormData}
+                        name={'email'}
                     />
                     <InputField
                         label={'Senha'}
                         type={'password'}
                         placeholder={'Digite sua senha'}
-                        value={password}
-                        action={setPassword}
+                        value={formData.password}
+                        action={setFormData}
+                        name={'password'}
                     />
                     <div className="text-left w-full max-w-[300px]">
                         <AuthLink
                             text={'Esqueci senha?'}
-                            route={'/reset'}
+                            route={'/forgot'}
                         />
                     </div>
                     <div className="w-full max-w-[300px] mt-2">
                         <Button
-                            action={() => { loginUser() }}
                             text={'Continuar'}
                         />
                     </div>
@@ -79,8 +94,11 @@ const Login = () => {
                             route={'/register'}
                         />
                     </div>
-                </div>
+                </form>
             </div>
+            {loading && (
+                <LoadinBlock />
+            )}
         </section >
     )
 }

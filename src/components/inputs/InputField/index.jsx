@@ -1,7 +1,7 @@
 import { Eye, EyeClosed } from 'lucide-react';
 import { useState } from 'react';
 
-const InputField = ({ label, type, placeholder, value, action }) => {
+const InputField = ({ label, type, placeholder, value, action, name }) => {
 
     const [showPassword, setShowPassword] = useState(false)
 
@@ -14,11 +14,12 @@ const InputField = ({ label, type, placeholder, value, action }) => {
                     type={type == "password" ? showPassword ? "text" : "password" : ''}
                     placeholder={placeholder}
                     value={value}
-                    onChange={(e) => action(e.target.value)}
+                    onChange={(e) => action((prev) => ({ ...prev, [name]: e.target.value }))}
                 />
                 <button
                     className='absolute right-3'
                     onClick={() => setShowPassword(!showPassword)}
+                    type='button'
                 >
                     {type == "password" ? showPassword == true ? <Eye size={20} /> : <EyeClosed size={20} /> : ''}
                 </button>
