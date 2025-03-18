@@ -1,15 +1,21 @@
 import { useState } from "react"
-import Button from "../../../components/inputs/Button"
-import InputField from "../../../components/inputs/InputField"
-import AuthLink from "../../../components/links/AuthLink"
-import api from "../../../services/api"
+import Button from "@components/inputs/Button"
+import InputField from "@components/inputs/InputField"
+import AuthLink from "@components/links/AuthLink"
+import api from "@services/api"
+import LoadinBlock from "@components/alerts/LoadinBlock"
+import { toast } from "react-toastify"
 
 const Login = () => {
 
+    const [loading, setLoagind] = useState(false)
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
     const loginUser = async (e) => {
+
+        setLoagind(true)
+
         await api({
             method: 'post',
             url: 'auth/login',
@@ -17,16 +23,24 @@ const Login = () => {
                 email: email,
                 password: password
             }
+
         }).then((response) => {
-            console.log("Usuário logado com sucesso!")
+            console.log(response)
+            toast.success('Login')
         }).catch((error) => {
             console.log(error.response.data.error)
+            toast.error('Error')
         }).finally(() => {
             setEmail('')
             setPassword('')
+            setLoagind(false)
         })
     }
 
+
+    if (loading) {
+        return <LoadinBlock />
+    }
     return (
         <section className="min-h-screen flex items-center">
             <div className="w-full flex-col justify-center">

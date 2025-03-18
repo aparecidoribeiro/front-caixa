@@ -10,7 +10,7 @@ const InputField = ({ label, type, placeholder, value, action }) => {
             <label>{label}</label>
             <span className='flex items-center'>
                 <input
-                    className="w-full border-standard border-black-one rounded px-3 py-1  focus:outline-none placeholder-black-one text-sm"
+                    className="w-full border-standard border-black-one rounded px-3 py-1 bg-transparent  focus:outline-none placeholder-black-one text-sm"
                     type={type == "password" ? showPassword ? "text" : "password" : ''}
                     placeholder={placeholder}
                     value={value}
