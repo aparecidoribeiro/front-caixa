@@ -1,18 +1,16 @@
 import { useState } from "react"
 import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom"
+
 import Button from "@components/inputs/Button"
 import InputField from "@components/inputs/InputField"
 import AuthLink from "@components/links/AuthLink"
 import api from "@services/api"
 import LoadinBlock from "@components/alerts/LoadinBlock"
-import useNavigation from "@hooks/useNavigation"
-import { useNavigate } from "react-router-dom"
 
 const Login = () => {
 
-
-    const { goHome } = useNavigation()
-    const nav = useNavigate()
+    const navigation = useNavigate()
 
     const [loading, setLoagind] = useState(false)
     const [formData, setFormData] = useState({
@@ -43,10 +41,10 @@ const Login = () => {
                 }
 
             }).then((response) => {
-                nav('/')
+                navigation('/')
                 console.log(response)
             }).catch((erro) => {
-                // toast.error('Email ou senha incorreto')
+                toast.error('Email ou senha incorreto')
                 console.log(erro)
             }).finally(() => {
                 setFormData({ email: "", password: "" })

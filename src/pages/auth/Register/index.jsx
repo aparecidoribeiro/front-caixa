@@ -17,10 +17,18 @@ const Register = () => {
         passwordConfirmation: ""
     })
 
-    const verifyPassword = () => {
-        if (formData.password != formData.passwordConfirmation) {
-            return true
-        }
+    const comparePasswords = () => {
+        return formData.password === formData.passwordConfirmation
+    }
+
+    const validatePassword = () => {
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        return regex.test(formData.password)
+    }
+
+    const validateEmail = () => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(formData.email)
     }
 
     const validateInputs = () => {
@@ -31,11 +39,16 @@ const Register = () => {
     const resgisterUser = async (e) => {
         e.preventDefault()
 
-        if (validateInputs() == true) {
+        if (validateInputs()) {
             toast.error("Preencha todos os campos")
         }
-        else if (verifyPassword() == true) {
-            toast.error("As senhas não coincidem")
+        else if (!validateEmail()) {
+            toast.error("O e-mail inserido não é válido")
+        }
+        else if (!validatePassword()) {
+            toast.error("Sua senha deve ter 8 caracteres, incluindo letras e números")
+        } else if (!comparePasswords()) {
+            toast.error("As senhas não coincide")
         }
         else {
             setLoagind(true)
@@ -49,13 +62,18 @@ const Register = () => {
                     password_confirmation: formData.passwordConfirmation
                 }
             }).then((response) => {
-                console.log(response)
-                // toast.success("Certo")
+                toast.success("Usuário cadastrado com sucesso")
+                setFormData('')
             }).catch((error) => {
-                console.log(error)
-                // toast.error(error.response.data.error)
+                toast.error(error.response.data.error)
             }).finally(() => {
                 setLoagind(false)
+                setFormData({
+                    name: "",
+                    email: "",
+                    password: "",
+                    passwordConfirmation: ""
+                })
             })
         }
     }
