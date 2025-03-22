@@ -7,9 +7,16 @@ import InputField from "@components/inputs/InputField"
 import AuthLink from "@components/links/AuthLink"
 import api from "@services/api"
 import LoadinBlock from "@components/alerts/LoadinBlock"
+import { useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
+
+//reducers
+import { login } from '@features/auth.js'
 
 const Login = () => {
 
+    const auth = useSelector(state => state.auth.token)
+    const dispatch = useDispatch()
     const navigation = useNavigate()
 
     const [loading, setLoagind] = useState(false)
@@ -41,8 +48,10 @@ const Login = () => {
                 }
 
             }).then((response) => {
-                navigation('/')
+                const token = response.data.token
                 console.log(response)
+                dispatch(login(token))
+                navigation('/')
             }).catch((erro) => {
                 toast.error('Email ou senha incorreto')
                 console.log(erro)

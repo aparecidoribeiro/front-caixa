@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, BrowserRouter, Routes, Route } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 
 import Finance from '../pages/Finance'
 import AddCash from '../pages/Finance/AddCash'
@@ -7,6 +7,12 @@ import Register from '../pages/auth/Register'
 import Reset from '../pages/auth/Reset'
 import Forgot from '../pages/auth/Forgot'
 import App from '../App'
+import store from '../store'
+
+const privateRoute = (element) => {
+    const token = store.getState().auth.token
+    return token ? element : <Navigate to={'/login'} />
+}
 
 export const router = createBrowserRouter([
     {
@@ -15,7 +21,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Finance />
+                element: privateRoute(<Finance />)
             }
         ]
     },
