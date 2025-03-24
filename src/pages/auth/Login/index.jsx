@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { toast } from "react-toastify"
-import { useNavigate } from "react-router-dom"
+import { redirect, useNavigate } from "react-router-dom"
 
 import Button from "@components/inputs/Button"
 import InputField from "@components/inputs/InputField"
@@ -17,7 +17,7 @@ const Login = () => {
 
     const auth = useSelector(state => state.auth.token)
     const dispatch = useDispatch()
-    const navigation = useNavigate()
+    const navigate = useNavigate()
 
     const [loading, setLoagind] = useState(false)
     const [formData, setFormData] = useState({
@@ -49,9 +49,8 @@ const Login = () => {
 
             }).then((response) => {
                 const token = response.data.token
-                console.log(response)
                 dispatch(login(token))
-                navigation('/')
+                navigate('/')
             }).catch((erro) => {
                 toast.error('Email ou senha incorreto')
                 console.log(erro)

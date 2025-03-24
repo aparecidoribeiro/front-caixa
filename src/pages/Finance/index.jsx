@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import Loading from "@components/alerts/Loading"
 
 const Finance = () => {
-
 
     return (
         <>

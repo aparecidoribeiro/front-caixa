@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { createBrowserRouter, Navigate, useLocation } from 'react-router-dom'
 
 import Finance from '../pages/Finance'
 import AddCash from '../pages/Finance/AddCash'
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
         element: <App />,
         children: [
             {
-                path: '/',
+                index: true,
                 element: privateRoute(<Finance />)
             }
         ]

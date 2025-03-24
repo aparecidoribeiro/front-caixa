@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { useEffect } from "react"
-import { useDispatch } from "react-redux"
 
 const initialState = {
-    token: localStorage.getItem("token") || null,
+    token: localStorage.getItem("token") || null
 }
 
 const authSlice = createSlice({
@@ -12,11 +10,17 @@ const authSlice = createSlice({
     reducers: {
         login: (state, { payload }) => {
             state.token = payload
-            localStorage.setItem("token", state.token)
+            localStorage.setItem("token", payload)
+            window.location.href = "/"
+        },
+        logout: (state) => {
+            state.token = null
+            localStorage.removeItem("token")
+            window.location.href = "/login"
         }
     }
 })
 
 
-export const { login } = authSlice.actions
+export const { login, logout } = authSlice.actions
 export default authSlice.reducer
