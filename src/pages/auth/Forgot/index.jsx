@@ -1,8 +1,13 @@
-import Button from "../../../components/inputs/Button"
-import InputField from "../../../components/inputs/InputField"
-import AuthLink from "../../../components/links/AuthLink"
+import Button from "@components/inputs/Button"
+import InputField from "@components/inputs/InputField"
 
 const Forgot = () => {
+
+    const forgotPassword = () => {
+
+    }
+
+
     return (
         <section className="min-h-screen flex items-center">
             <div className="w-full flex-col justify-center">
@@ -16,6 +21,7 @@ const Forgot = () => {
                     <div className="w-full max-w-[300px] mt-2">
                         <Button
                             text={'Continuar'}
+                        // action={ }
                         />
                     </div>
                 </div>

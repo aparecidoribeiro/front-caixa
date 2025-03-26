@@ -30,6 +30,9 @@ export default {
       },
       animation: {
         bounceDots: 'bounceDots 1.4s infinite ease-in-out',
+      },
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"]
       }
     },
   },

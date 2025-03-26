@@ -6,6 +6,10 @@ import api from "@services/api"
 import { useState } from "react"
 import { toast } from "react-toastify"
 
+//utils
+import { validatePassword } from "@utils/validatePassword"
+import { validateEmail } from "@utils/validateEmail"
+
 const Register = () => {
 
     const [loading, setLoagind] = useState(false)
@@ -21,16 +25,6 @@ const Register = () => {
         return formData.password === formData.passwordConfirmation
     }
 
-    const validatePassword = () => {
-        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-        return regex.test(formData.password)
-    }
-
-    const validateEmail = () => {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(formData.email)
-    }
-
     const validateInputs = () => {
         const arrayDate = Object.values(formData)
         return arrayDate.some((value) => value.trim() == "")
@@ -42,40 +36,41 @@ const Register = () => {
         if (validateInputs()) {
             toast.error("Preencha todos os campos")
         }
-        else if (!validateEmail()) {
+        else if (!validateEmail(formData.email)) {
             toast.error("O e-mail inserido não é válido")
         }
-        else if (!validatePassword()) {
+        else if (!validatePassword(formData.password)) {
             toast.error("Sua senha deve ter 8 caracteres, incluindo letras e números")
-        } else if (!comparePasswords()) {
+        }
+        else if (!comparePasswords()) {
             toast.error("As senhas não coincide")
         }
-        else {
-            setLoagind(true)
-            await api({
-                method: 'post',
-                url: 'auth/register',
-                data: {
-                    name: formData.name,
-                    email: formData.email,
-                    password: formData.password,
-                    password_confirmation: formData.passwordConfirmation
-                }
-            }).then((response) => {
-                toast.success("Usuário cadastrado com sucesso")
-                setFormData('')
-            }).catch((error) => {
-                toast.error(error.response.data.error)
-            }).finally(() => {
-                setLoagind(false)
-                setFormData({
-                    name: "",
-                    email: "",
-                    password: "",
-                    passwordConfirmation: ""
-                })
-            })
-        }
+        // else {
+        //     setLoagind(true)
+        //     await api({
+        //         method: 'post',
+        //         url: 'auth/register',
+        //         data: {
+        //             name: formData.name,
+        //             email: formData.email,
+        //             password: formData.password,
+        //             password_confirmation: formData.passwordConfirmation
+        //         }
+        //     }).then((response) => {
+        //         toast.success("Usuário cadastrado com sucesso")
+        //         setFormData('')
+        //     }).catch((error) => {
+        //         toast.error(error.response.data.error)
+        //     }).finally(() => {
+        //         setLoagind(false)
+        //         setFormData({
+        //             name: "",
+        //             email: "",
+        //             password: "",
+        //             passwordConfirmation: ""
+        //         })
+        //     })
+        // }
     }
 
     return (
