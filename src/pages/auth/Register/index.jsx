@@ -45,32 +45,32 @@ const Register = () => {
         else if (!comparePasswords()) {
             toast.error("As senhas não coincide")
         }
-        // else {
-        //     setLoagind(true)
-        //     await api({
-        //         method: 'post',
-        //         url: 'auth/register',
-        //         data: {
-        //             name: formData.name,
-        //             email: formData.email,
-        //             password: formData.password,
-        //             password_confirmation: formData.passwordConfirmation
-        //         }
-        //     }).then((response) => {
-        //         toast.success("Usuário cadastrado com sucesso")
-        //         setFormData('')
-        //     }).catch((error) => {
-        //         toast.error(error.response.data.error)
-        //     }).finally(() => {
-        //         setLoagind(false)
-        //         setFormData({
-        //             name: "",
-        //             email: "",
-        //             password: "",
-        //             passwordConfirmation: ""
-        //         })
-        //     })
-        // }
+        else {
+            setLoagind(true)
+            await api({
+                method: 'post',
+                url: 'auth/register',
+                data: {
+                    name: formData.name,
+                    email: formData.email,
+                    password: formData.password,
+                    password_confirmation: formData.passwordConfirmation
+                }
+            }).then((response) => {
+                toast.success("Usuário cadastrado com sucesso")
+                setFormData('')
+            }).catch((error) => {
+                toast.error(error.response.data.error)
+            }).finally(() => {
+                setLoagind(false)
+                setFormData({
+                    name: "",
+                    email: "",
+                    password: "",
+                    passwordConfirmation: ""
+                })
+            })
+        }
     }
 
     return (
