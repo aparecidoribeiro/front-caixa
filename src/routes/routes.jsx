@@ -28,19 +28,19 @@ export const router = createBrowserRouter([
         ]
     },
     {
-        path: 'login',
+        path: '/login',
         element: <Login />
     },
     {
-        path: 'register',
+        path: '/register',
         element: <Register />
     },
     {
-        path: 'reset-password',
+        path: '/reset-password',
         element: <Reset />,
     },
     {
-        path: 'forgot',
-        element: <Forgot />
+        path: '/forgot',
+        element: <Forgot />,
     }
 ])

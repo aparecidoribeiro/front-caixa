@@ -14,8 +14,5 @@ export default defineConfig({
       "@features": path.resolve(__dirname, "src/features"),
       "@utils": path.resolve(__dirname, "src/utils")
     }
-  },
-  server: {
-    port: 5173
   }
 })

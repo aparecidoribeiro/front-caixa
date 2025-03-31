@@ -1,14 +1,16 @@
+import { useState } from "react"
+import { toast } from "react-toastify"
 import Button from "@components/inputs/Button"
 import InputField from "@components/inputs/InputField"
 import AuthLink from "@components/links/AuthLink"
 import LoadinBlock from "@components/alerts/LoadinBlock"
 import api from "@services/api"
-import { useState } from "react"
-import { toast } from "react-toastify"
 
 //utils
 import { validatePassword } from "@utils/validatePassword"
+import { comparePasswords } from "@utils/comparePasswords"
 import { validateEmail } from "@utils/validateEmail"
+import { validateInputs } from "@utils/validateInputs"
 
 const Register = () => {
 
@@ -21,19 +23,12 @@ const Register = () => {
         passwordConfirmation: ""
     })
 
-    const comparePasswords = () => {
-        return formData.password === formData.passwordConfirmation
-    }
 
-    const validateInputs = () => {
-        const arrayDate = Object.values(formData)
-        return arrayDate.some((value) => value.trim() == "")
-    }
 
     const resgisterUser = async (e) => {
         e.preventDefault()
 
-        if (validateInputs()) {
+        if (validateInputs(formData)) {
             toast.error("Preencha todos os campos")
         }
         else if (!validateEmail(formData.email)) {
@@ -42,7 +37,7 @@ const Register = () => {
         else if (!validatePassword(formData.password)) {
             toast.error("Sua senha deve ter 8 caracteres, incluindo letras e números")
         }
-        else if (!comparePasswords()) {
+        else if (!comparePasswords(formData)) {
             toast.error("As senhas não coincide")
         }
         else {
