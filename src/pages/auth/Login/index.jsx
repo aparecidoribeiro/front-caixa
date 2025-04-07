@@ -62,7 +62,7 @@ const Login = () => {
     }
 
     return (
-        <section className="min-h-screen flex items-center">
+        <section className="min-h-screen flex items-center px-standard">
             <div className="w-full flex-col justify-center">
                 <h1 className="text-center text-3xl font-medium mb-2">Fazer login</h1>
                 <form onSubmit={loginUser} className="flex flex-col gap-2 items-center">

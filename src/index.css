@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-    @apply px-standard bg-background h-screen text-black-one font-roboto
+    @apply bg-background h-screen text-black-one font-roboto
 }

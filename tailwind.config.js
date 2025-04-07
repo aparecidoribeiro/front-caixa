@@ -33,6 +33,9 @@ export default {
       },
       fontFamily: {
         roboto: ["Roboto", "sans-serif"]
+      },
+      boxShadow: {
+        menu: '0 -2px 10px #0002'
       }
     },
   },

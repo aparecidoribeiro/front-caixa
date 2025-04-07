@@ -11,10 +11,12 @@ import { validatePassword } from "@utils/validatePassword"
 import { comparePasswords } from "@utils/comparePasswords"
 import { validateEmail } from "@utils/validateEmail"
 import { validateInputs } from "@utils/validateInputs"
+import { useNavigate } from "react-router-dom"
 
 const Register = () => {
 
     const [loading, setLoagind] = useState(false)
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         name: "",
@@ -53,7 +55,6 @@ const Register = () => {
                 }
             }).then((response) => {
                 toast.success("Usuário cadastrado com sucesso")
-                setFormData('')
             }).catch((error) => {
                 toast.error(error.response.data.error)
             }).finally(() => {
@@ -69,7 +70,7 @@ const Register = () => {
     }
 
     return (
-        <section className="min-h-screen flex items-center">
+        <section className="min-h-screen flex items-center px-standard">
             <form onSubmit={resgisterUser} className="w-full flex-col justify-center">
                 <h1 className="text-center text-3xl font-medium mb-2">Criar conta</h1>
                 <div className="flex flex-col gap-2 items-center">
