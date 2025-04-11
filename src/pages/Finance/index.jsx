@@ -1,16 +1,30 @@
 import { useEffect } from "react"
 import Loading from "@components/alerts/Loading"
 import Submenu from "@components/surfaces/Submenu"
+import { Outlet } from "react-router-dom"
 
 const Finance = () => {
 
+    const options = [
+        {
+            name: 'Hoje',
+            route: '/'
+        },
+        {
+            name: 'Movimentação',
+            route: '/movimentacao'
+        }
+    ]
+
     return (
         <section className="py-6">
-            <Submenu />
+            <Submenu
+                options={options}
+            />
             <div className="py-4">
-                <h1>Tela de Inicial</h1>
+                <Outlet />
             </div>
-        </section>
+        </section >
     )
 }
 
