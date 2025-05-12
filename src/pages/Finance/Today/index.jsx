@@ -13,7 +13,7 @@ const Today = () => {
             <Button
                 text="Adicionar Caixa"
                 style="w-[200px]"
-                action={() => Navigate('/addCaixa')}
+                action={() => Navigate('/add')}
             />
         </div>
     )

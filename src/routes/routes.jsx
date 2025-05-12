@@ -24,18 +24,14 @@ export const router = createBrowserRouter([
         errorElement: <NotFound />,
         children: [
             {
-                path: '',
+                path: '/',
                 element: <Finance />,
                 loader: authLoader,
                 children: [
                     { index: true, element: <Today /> },
                     { path: 'movimentacao', element: <AddCash /> },
+                    { path: 'add', element: <AddCash /> }
                 ]
-            },
-            {
-                path: '/addCaixa',
-                element: <AddCash />,
-                loader: authLoader,
             },
             {
                 path: 'produtos',

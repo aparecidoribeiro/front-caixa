@@ -8,7 +8,8 @@ const Finance = () => {
     const options = [
         {
             name: 'Hoje',
-            route: '/'
+            route: '',
+            end: true
         },
         {
             name: 'Movimentação',

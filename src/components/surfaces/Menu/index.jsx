@@ -1,12 +1,22 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { Wallet, ShoppingCart, BookOpenText } from 'lucide-react';
 
 const Menu = () => {
+
+
+    const location = useLocation()
+
     return (
         <nav className='absolute w-full left-0 bottom-0 px-standard pt-2 pb-2 bg-white flex justify-between shadow-menu'>
             <NavLink
                 to='/'
-                className={({ isActive }) => `flex flex-col items-center ${isActive && 'text-primary'}`}>
+                className={() => {
+                    const isAtivo = location.pathname === '/' || location.pathname.startsWith('/movimentacao') || location.pathname.startsWith('/add')
+
+                    return `flex flex-col items-center ${isAtivo && 'text-primary'
+                        }`
+
+                }}>
                 <Wallet size={22} />
                 <span className='text-xs font-medium'>Caixa</span>
             </NavLink>

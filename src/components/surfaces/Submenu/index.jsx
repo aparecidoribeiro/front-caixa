@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 
 
 const Submenu = ({ options }) => {
@@ -6,9 +6,19 @@ const Submenu = ({ options }) => {
     return (
         <nav className="text-[12px] flex gap-3">
             {
-                options.map((item) => (
-                    <NavLink to={item.route} key={item.name} className={({ isActive }) => `px-2 py-1 rounded-xl ${isActive && 'bg-black-one text-white'}`}>{item.name}</NavLink>
-                ))
+                options.map((item) => {
+
+                    return (
+                        <NavLink to={item.route} key={item.name} end={item.end}
+                            className={({ isActive }) => {
+                                return `px-2 py-1 rounded-xl 
+                                ${isActive && 'bg-black-one text-white'}`
+                            }}
+                        >
+                            {item.name}
+                        </NavLink>
+                    )
+                })
             }
         </nav>
     )
