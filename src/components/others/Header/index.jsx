@@ -1,4 +1,4 @@
-import Avatar from "@components/surfaces/Avatar"
+import Avatar from "@components/others/Avatar"
 
 const Header = () => {
     return (

@@ -6,8 +6,7 @@ import Button from "@components/inputs/Button"
 import InputField from "@components/inputs/InputField"
 import AuthLink from "@components/links/AuthLink"
 import LoadinBlock from "@components/alerts/LoadinBlock"
-import { useDispatch } from "react-redux"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import api from "@services/api"
 
 //reducers
@@ -18,7 +17,7 @@ const Login = () => {
     const auth = useSelector(state => state.auth.token)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
+ 
     const [loading, setLoagind] = useState(false)
     const [formData, setFormData] = useState({
         email: "",

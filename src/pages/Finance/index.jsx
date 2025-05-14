@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import Loading from "@components/alerts/Loading"
-import Submenu from "@components/surfaces/Submenu"
+import Submenu from "@components/others/Submenu"
 import { Outlet } from "react-router-dom"
 
 const Finance = () => {

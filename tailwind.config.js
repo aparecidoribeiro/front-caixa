@@ -12,9 +12,10 @@ export default {
         'black-opacity': '#0006',
         'primary': '#FA9B2F',
         'white': '#FFF',
+        'green': '#D3FAF6'
       },
       padding: {
-        'standard': '20px',
+        'standard': '10px',
       },
       borderRadius: {
         'standard': '4px'

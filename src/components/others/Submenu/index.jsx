@@ -12,7 +12,7 @@ const Submenu = ({ options }) => {
                         <NavLink to={item.route} key={item.name} end={item.end}
                             className={({ isActive }) => {
                                 return `px-2 py-1 rounded-xl 
-                                ${isActive && 'bg-black-one text-white'}`
+                                ${isActive ? 'bg-black-one text-white' : 'bg-white text-black-one'}`
                             }}
                         >
                             {item.name}
