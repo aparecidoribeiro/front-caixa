@@ -1,6 +1,6 @@
 import Button from "@components/inputs/Button"
 import { useNavigate } from "react-router-dom"
-import PlaymentList from "../../../components/others/PlaymentList"
+import PlaymentList from "@components/others/PlaymentList"
 
 
 const Today = () => {

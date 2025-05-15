@@ -1,7 +1,8 @@
-import { createBrowserRouter, Navigate, redirect, useLocation } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 
 import AddCash from '../pages/Finance/AddCash'
 import Today from '../pages/Finance/Today'
+import Transaction from '../pages/Finance/Transaction'
 import Login from '../pages/auth/Login'
 import Register from '../pages/auth/Register'
 import Reset from '../pages/auth/Reset'
@@ -10,11 +11,11 @@ import NotFound from '../pages/Error/NotFound'
 import App from '../App'
 
 import Finance from '../pages/Finance'
+import Products from '../pages/Products'
+import Sheet from '../pages/Sheet'
 
 //Loaders
 import { authLoader } from '../loaders/authLoader'
-import Products from '../pages/Products'
-import Sheet from '../pages/Sheet'
 
 
 export const router = createBrowserRouter([
@@ -29,7 +30,7 @@ export const router = createBrowserRouter([
                 loader: authLoader,
                 children: [
                     { index: true, element: <Today /> },
-                    { path: 'movimentacao', element: <AddCash /> },
+                    { path: 'movimentacao', element: <Transaction /> },
                     { path: 'add', element: <AddCash /> }
                 ]
             },

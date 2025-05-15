@@ -8,6 +8,9 @@ const PlaymentList = () => {
             <div className="flex flex-col gap-2">
                 <TypeCard />
                 <TypeCard />
+                <TypeCard />
+                <TypeCard />
+                <TypeCard />
             </div>
         </div>
     )

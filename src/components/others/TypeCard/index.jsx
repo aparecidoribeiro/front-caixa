@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 
 const TypeCard = () => {
+
     return (
         <div className='grid grid-cols-[auto_auto_auto]'>
             <div className='col-start-1 self-center w-8 h-8 rounded-[50%] bg-green flex justify-center'>

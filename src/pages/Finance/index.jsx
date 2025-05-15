@@ -19,10 +19,11 @@ const Finance = () => {
 
     return (
         <section className="py-6">
+            { }
             <Submenu
                 options={options}
             />
-            <div className="py-4">
+            <div className="mt-2">
                 <Outlet />
             </div>
         </section >

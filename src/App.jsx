@@ -5,7 +5,7 @@ import Menu from "@components/others/Menu"
 function App() {
 
   return (
-    <div className="px-standard">
+    <div className="px-standard pb-10 pt-5 bg-background">
       <Header />
       <Outlet />
       <Menu />
