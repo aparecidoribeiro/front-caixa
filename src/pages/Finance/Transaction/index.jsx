@@ -1,7 +1,12 @@
-
+import { useState } from 'react'
 import FilterDate from '@components/others/FilterDate'
+import Block from "@components/alerts/Block"
+import Calendar from '@components/inputs/Calendar'
+import InfoTransaction from '@components/others/InfoTransaction'
 
 const Trasaction = () => {
+
+    const [block, setBlock] = useState(false)
 
     const options = [
         {
@@ -18,7 +23,8 @@ const Trasaction = () => {
         },
         {
             name: "Personalizar",
-            date: undefined
+            date: undefined,
+            action: setBlock
         }
     ]
 
@@ -30,6 +36,14 @@ const Trasaction = () => {
                     options={options}
                 />
             </div>
+            <InfoTransaction />
+
+            {block && (
+                <>
+                    <Calendar action={setBlock} />
+                    <Block />
+                </>
+            )}
         </section>
     )
 }

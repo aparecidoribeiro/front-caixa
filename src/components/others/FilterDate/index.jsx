@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { NavLink } from "react-router-dom"
 
 const FilterDate = ({ options }) => {
 
@@ -13,13 +12,13 @@ const FilterDate = ({ options }) => {
                     return (
                         <button to={item.route} key={item.name}
                             className={`px-2 py-1 rounded-xl 
-                                ${date === item.date && 'bg-black-one text-white'}`
+                                ${date === item.date ? 'bg-black-one text-white' : 'bg-white text-black-one'}`
                             }
                             onClick={() => {
                                 setDate(item.date)
 
                                 if (item.date == undefined) {
-                                    console.log('Abrir modal')
+                                    item.action(true)
                                 }
                             }}
                         >

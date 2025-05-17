@@ -1,7 +1,8 @@
-import Button from "@components/inputs/Button"
 import { useNavigate } from "react-router-dom"
-import PlaymentList from "@components/others/PlaymentList"
+import { Plus } from 'lucide-react';
 
+import Button from "@components/inputs/Button"
+import PlaymentList from "@components/others/PlaymentList"
 
 const Today = () => {
 
@@ -14,7 +15,8 @@ const Today = () => {
                 <h1 className="font-bold text-[42px]">R$10.49</h1>
                 <Button
                     text="Adicionar Caixa"
-                    style="w-[200px]"
+                    icon={<Plus />}
+                    style="!w-[200px]"
                     action={() => Navigate('/add')}
                 />
             </div>

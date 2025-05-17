@@ -1,14 +1,17 @@
 
 
-const Button = ({ text, action, style }) => {
+const Button = ({ text, action, style, icon }) => {
     return (
         <>
             <button
-                className={`w-full py-1 bg-primary text-white rounded text-lg font-normal max-w-[300px] ${style}`}
+                className={`w-full flex flex-row justify-center py-2 bg-primary text-white rounded-lg text-lg font-normal ${style}`}
                 onClick={action}
                 type="submit"
             >
-                {text}
+                <span className="flex items-center">
+                    {icon}
+                    {text}
+                </span>
             </button>
         </>
     )

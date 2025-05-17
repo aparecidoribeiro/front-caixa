@@ -1,9 +1,11 @@
 import { useEffect } from "react"
 import Loading from "@components/alerts/Loading"
 import Submenu from "@components/others/Submenu"
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 
 const Finance = () => {
+
+    const location = useLocation()
 
     const options = [
         {
@@ -19,10 +21,7 @@ const Finance = () => {
 
     return (
         <section className="py-6">
-            { }
-            <Submenu
-                options={options}
-            />
+            {location.pathname != '/add' && <Submenu options={options} />}
             <div className="mt-2">
                 <Outlet />
             </div>

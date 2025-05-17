@@ -31,8 +31,12 @@ export const router = createBrowserRouter([
                 children: [
                     { index: true, element: <Today /> },
                     { path: 'movimentacao', element: <Transaction /> },
-                    { path: 'add', element: <AddCash /> }
                 ]
+            },
+            {
+                path: 'add',
+                element: <AddCash />,
+                loader: authLoader
             },
             {
                 path: 'produtos',
