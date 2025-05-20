@@ -5,3 +5,12 @@
 body {
     @apply bg-background h-screen text-black-one font-roboto
 }
+
+
+.rdrDateDisplayWrapper {
+    display: none;
+}
+
+.rdrDayToday .rdrDayNumber span::after {
+    background: #FA9B2F !important;
+}

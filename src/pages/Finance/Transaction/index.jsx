@@ -3,6 +3,7 @@ import FilterDate from '@components/others/FilterDate'
 import Block from "@components/alerts/Block"
 import Calendar from '@components/inputs/Calendar'
 import InfoTransaction from '@components/others/InfoTransaction'
+import PlaymentList from '@components/others/PlaymentList'
 
 const Trasaction = () => {
 
@@ -29,7 +30,7 @@ const Trasaction = () => {
     ]
 
     return (
-        <section>
+        < section >
             <div>
                 <h3 className='text-xs'>Filtrar data</h3>
                 <FilterDate
@@ -37,14 +38,17 @@ const Trasaction = () => {
                 />
             </div>
             <InfoTransaction />
+            <PlaymentList />
 
-            {block && (
-                <>
-                    <Calendar action={setBlock} />
-                    <Block />
-                </>
-            )}
-        </section>
+            {
+                block && (
+                    <>
+                        <Calendar action={setBlock} />
+                        <Block />
+                    </>
+                )
+            }
+        </section >
     )
 }
 

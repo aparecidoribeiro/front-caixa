@@ -1,11 +1,14 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { setEndDate } from "@features/date"
 
 const FilterDate = ({ options }) => {
 
     const [date, setDate] = useState(7)
+    const dispatch = useDispatch()
 
     return (
-        <nav className="text-[12px] flex gap-3">
+        <nav className="text-[12px] flex gap-3 mt-1">
             {
                 options.map((item) => {
 
@@ -15,10 +18,12 @@ const FilterDate = ({ options }) => {
                                 ${date === item.date ? 'bg-black-one text-white' : 'bg-white text-black-one'}`
                             }
                             onClick={() => {
-                                setDate(item.date)
-
                                 if (item.date == undefined) {
                                     item.action(true)
+                                    setDate(undefined)
+                                } else {
+                                    setDate(item.date)
+                                    dispatch(setEndDate(item.date))
                                 }
                             }}
                         >
