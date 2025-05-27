@@ -12,10 +12,12 @@ export default {
         'black-opacity': '#0006',
         'primary': '#FA9B2F',
         'white': '#FFF',
-        'green': '#D3FAF6'
+        'green': '#D3FAF6',
+        'placerhold-color': '#808080',
+        'border-color': '#CCC',
       },
       padding: {
-        'standard': '10px',
+        'standard': '15px',
       },
       borderRadius: {
         'standard': '4px'

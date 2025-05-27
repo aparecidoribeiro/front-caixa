@@ -9,10 +9,10 @@ function App() {
   const pathname = location.pathname != '/add'
 
   return (
-    <div className="px-standard pb-10 pt-5 bg-background">
+    <div className="px-standard pb-[54px] pt-5 bg-background">
       {pathname && <Header />}
       <Outlet />
-      <Menu />
+      {pathname && <Menu />}
     </div>
   )
 }

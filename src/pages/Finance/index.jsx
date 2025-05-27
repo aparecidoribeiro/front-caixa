@@ -20,7 +20,7 @@ const Finance = () => {
     ]
 
     return (
-        <section className="py-6">
+        <section>
             {location.pathname != '/add' && <Submenu options={options} />}
             <div className="mt-2">
                 <Outlet />

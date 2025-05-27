@@ -25,7 +25,7 @@ const Calendar = ({ action }) => {
     let formatEndDate = format(state[0].endDate, 'dd/MM/yyyy')
 
     return (
-        <div className="w-full h-auto bg-white z-20 fixed  ml-[-10px] flex flex-col items-center p-5 rounded-t-lg bottom-0">
+        <div className="w-full h-auto bg-white z-20 fixed  ml-[-15px] flex flex-col items-center p-5 rounded-t-lg bottom-0">
             <div className='flex items-center'>
                 <h3 className='text-sm'>Personalizar</h3>
                 <button

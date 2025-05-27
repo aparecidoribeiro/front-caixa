@@ -6,11 +6,12 @@ const InputField = ({ label, type, placeholder, value, action, name }) => {
     const [showPassword, setShowPassword] = useState(false)
 
     return (
-        <div className="relative flex flex-col w-full max-w-[300px]">
+        <div className="relative flex flex-col w-full">
             <label>{label}</label>
             <span className='flex items-center'>
                 <input
-                    className="w-full border-standard border-black-one rounded px-3 py-1 bg-transparent  focus:outline-none placeholder-black-one text-sm"
+                    className="w-full min-h-[38px] border-standard border-border-color rounded-[4px] px-[10px] py-1 bg-transparent 
+                    outline-none placeholder-placerhold-color text-base "
                     type={type == "password" ? showPassword ? "text" : "password" : ''}
                     placeholder={placeholder}
                     value={value}

@@ -11,12 +11,10 @@ import { validatePassword } from "@utils/validatePassword"
 import { comparePasswords } from "@utils/comparePasswords"
 import { validateEmail } from "@utils/validateEmail"
 import { validateInputs } from "@utils/validateInputs"
-import { useNavigate } from "react-router-dom"
 
 const Register = () => {
 
-    const [loading, setLoagind] = useState(false)
-    const navigate = useNavigate()
+    const [loading, setLoagind] = useState(true)
 
     const [formData, setFormData] = useState({
         name: "",
@@ -85,7 +83,7 @@ const Register = () => {
                     <InputField
                         label={'Email'}
                         type={'email'}
-                        placeholder={'Digite sue email'}
+                        placeholder={'Digite seu email'}
                         value={formData.email}
                         action={setFormData}
                         name={'email'}

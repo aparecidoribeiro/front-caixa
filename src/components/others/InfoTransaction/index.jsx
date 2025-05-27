@@ -3,7 +3,6 @@ import { useSelector } from "react-redux"
 
 const InfoTransaction = () => {
 
-
     const date = useSelector(state => state.date)
 
     const startDate = date.startDate
@@ -21,7 +20,7 @@ const InfoTransaction = () => {
                 <p className="text-sm font-light">Pix: <strong>R$0,00</strong></p>
                 <p className="text-sm font-light">Cartão: <strong>R$0,00</strong></p>
                 <p className="text-sm font-light">Dinheiro: <strong>R$0,00</strong></p>
-                <p className="text-sm font-light">Total de Produtos: <strong>R$0,00</strong></p>
+                <p className="text-sm font-light">Total em Produtos: <strong>R$0,00</strong></p>
             </div>
         </div>
     )
