@@ -38,7 +38,7 @@ const Trasaction = () => {
                 />
             </div>
             <InfoTransaction />
-            <PlaymentList />
+            {/* <PlaymentList /> */}
 
             {
                 block && (

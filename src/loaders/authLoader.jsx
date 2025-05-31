@@ -3,9 +3,9 @@ import { redirect } from "react-router-dom"
 
 export const authLoader = () => {
 
-    const token = localStorage.getItem("token")
+    const user = JSON.parse(localStorage.getItem("user"))
 
-    if (!token) {
+    if (!user) {
         return redirect('/login')
     }
 

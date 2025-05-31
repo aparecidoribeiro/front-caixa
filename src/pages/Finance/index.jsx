@@ -1,5 +1,3 @@
-import { useEffect } from "react"
-import Loading from "@components/alerts/Loading"
 import Submenu from "@components/others/Submenu"
 import { Outlet, useLocation } from "react-router-dom"
 
@@ -10,7 +8,7 @@ const Finance = () => {
     const options = [
         {
             name: 'Hoje',
-            route: '',
+            route: '/',
             end: true
         },
         {

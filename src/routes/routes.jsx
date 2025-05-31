@@ -47,23 +47,23 @@ export const router = createBrowserRouter([
                 path: 'fichas',
                 element: <Sheet />,
                 loader: authLoader
+            },
+            {
+                path: '/login',
+                element: <Login />
+            },
+            {
+                path: '/register',
+                element: <Register />
+            },
+            {
+                path: '/reset-password',
+                element: <Reset />,
+            },
+            {
+                path: '/forgot',
+                element: <Forgot />,
             }
         ]
     },
-    {
-        path: '/login',
-        element: <Login />
-    },
-    {
-        path: '/register',
-        element: <Register />
-    },
-    {
-        path: '/reset-password',
-        element: <Reset />,
-    },
-    {
-        path: '/forgot',
-        element: <Forgot />,
-    }
 ])

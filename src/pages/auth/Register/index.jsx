@@ -14,7 +14,7 @@ import { validateInputs } from "@utils/validateInputs"
 
 const Register = () => {
 
-    const [loading, setLoagind] = useState(true)
+    const [loading, setLoagind] = useState(false)
 
     const [formData, setFormData] = useState({
         name: "",
@@ -104,7 +104,7 @@ const Register = () => {
                         action={setFormData}
                         name={'passwordConfirmation'}
                     />
-                    <div className="w-full max-w-[300px] mt-2">
+                    <div className="w-full mt-2">
                         <Button
                             text={'Continuar'}
                         />

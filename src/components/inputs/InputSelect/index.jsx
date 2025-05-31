@@ -9,11 +9,17 @@ const InputSelect = ({ label, placeholder, options, value, name, action }) => {
             outline: "none",
             borderColor: "#CCC",
             backgroundColor: 'transparent',
+        }), input: (baseStyles) => ({
+            ...baseStyles,
+            zIndex: 2,
+            position: 'relative',
+            boxShadow: "none",
+            outline: "none",
         })
     }
 
     return (
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full z-2">
             <label>{label}</label>
             <Select
                 options={options}

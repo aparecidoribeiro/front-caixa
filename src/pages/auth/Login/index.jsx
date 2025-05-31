@@ -1,24 +1,25 @@
 import { useState } from "react"
 import { toast } from "react-toastify"
-import { useNavigate } from "react-router-dom"
 
 import Button from "@components/inputs/Button"
 import InputField from "@components/inputs/InputField"
 import AuthLink from "@components/links/AuthLink"
-import LoadinBlock from "@components/alerts/LoadinBlock"
 import { useSelector, useDispatch } from "react-redux"
 import api from "@services/api"
 
 //reducers
 import { login } from '@features/auth.js'
 
+//Features loading
+import { setLoading } from '@features/loading.js'
+
+
 const Login = () => {
+
 
     const auth = useSelector(state => state.auth.token)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
- 
-    const [loading, setLoagind] = useState(false)
+
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -33,11 +34,10 @@ const Login = () => {
     const loginUser = async (e) => {
         e.preventDefault();
 
-        setLoagind(true)
         if (validateInputs()) {
             toast.error("Preencha todos os campos")
-            setLoagind(false)
         } else {
+            dispatch(setLoading(true))
             await api({
                 method: 'post',
                 url: 'auth/login',
@@ -47,21 +47,27 @@ const Login = () => {
                 }
 
             }).then((response) => {
-                const token = response.data.token
-                dispatch(login(token))
-                navigate('/')
+                const dataUser = {
+                    token: response.data.token,
+                    id: response.data.user.id,
+                    email: response.data.user.email,
+                    name: response.data.user.name,
+                }
+
+
+                console.log(response)
+                dispatch(login(dataUser))
             }).catch((erro) => {
                 toast.error('Email ou senha incorreto')
-                console.log(erro)
+                dispatch(setLoading(false))
             }).finally(() => {
                 setFormData({ email: "", password: "" })
-                setLoagind(false)
             })
         }
     }
 
     return (
-        <section className="min-h-screen flex items-center px-standard">
+        <section className="min-h-screen flex items-center">
             <div className="w-full flex-col justify-center">
                 <h1 className="text-center text-3xl font-medium mb-2">Fazer login</h1>
                 <form onSubmit={loginUser} className="flex flex-col gap-2 items-center">
@@ -81,13 +87,13 @@ const Login = () => {
                         action={setFormData}
                         name={'password'}
                     />
-                    <div className="text-left w-full max-w-[300px]">
+                    <div className="text-left w-full">
                         <AuthLink
                             text={'Esqueci senha?'}
                             route={'/forgot'}
                         />
                     </div>
-                    <div className="w-full max-w-[300px] mt-2">
+                    <div className="w-full mt-2">
                         <Button
                             text={'Continuar'}
                         />
@@ -100,10 +106,7 @@ const Login = () => {
                         />
                     </div>
                 </form>
-            </div>
-            {loading && (
-                <LoadinBlock />
-            )}
+            </div >
         </section >
     )
 }

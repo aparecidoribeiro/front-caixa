@@ -7,7 +7,7 @@ const Menu = () => {
     const location = useLocation()
 
     return (
-        <nav className='fixed w-full left-0 bottom-0 px-5 pt-2 pb-2 bg-white flex justify-between shadow-menu'>
+        <nav className='fixed w-full left-0 bottom-0 px-5 pt-2 pb-2 bg-white flex justify-between shadow-menu z-30'>
             <NavLink
                 to='/'
                 className={() => {
