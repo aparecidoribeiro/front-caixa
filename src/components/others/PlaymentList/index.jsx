@@ -1,6 +1,7 @@
-import { format, parseISO } from "date-fns"
 import TypeCard from "@components/others/TypeCard"
+import { format, parseISO } from "date-fns"
 
+import { CircleAlert } from 'lucide-react';
 
 const PlaymentList = (data) => {
 
@@ -21,16 +22,21 @@ const PlaymentList = (data) => {
             <h3 className="text-base">Histórico</h3>
             <div className="flex flex-col gap-2">
                 {
-                    filterDate.map((item) => {
-                        return (
-                            <TypeCard
-                                key={item.id}
-                                amount={item.amount}
-                                paymentType={item.payment_type}
-                                date={item.created_at}
-                            />
-                        )
-                    })
+                    filterDate.length == 0 ?
+                        <h1 className="flex items-center gap-1 text-sm ">
+                            <CircleAlert size={16} /> Nenhum histórico de transação
+                        </h1>
+                        :
+                        filterDate.map((item) => {
+                            return (
+                                <TypeCard
+                                    key={item.id}
+                                    amount={item.amount}
+                                    paymentType={item.payment_type}
+                                    date={item.created_at}
+                                />
+                            )
+                        })
                 }
             </div>
         </div>

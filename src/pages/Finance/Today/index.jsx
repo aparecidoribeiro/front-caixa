@@ -1,11 +1,11 @@
 import { Plus } from 'lucide-react';
 import { useSelector } from "react-redux"
 import { NumericFormat } from 'react-number-format';
+import { useEffect } from "react";
+import { sumAmounts } from "@utils/sumAmounts";
+
 import Button from "@components/inputs/Button"
 import PlaymentList from "@components/others/PlaymentList"
-import { useEffect } from "react";
-import { useState } from "react";
-import { sumAmounts } from "./actions/sumAmounts";
 
 import { getCaixa } from "./actions/getCaixa";
 
@@ -15,30 +15,37 @@ import { setLoading } from '@features/loading.js'
 
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import { setHistory } from '@features/hitoryToday';
 
 
 const Today = () => {
 
-    const navigate = useNavigate()
-    const user = useSelector(state => state.auth.user)
-
-    const [data, setData] = useState([])
-    const [amount, setAmount] = useState(0)
-
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
+    const user = useSelector(state => state.auth.user)
+    const dataToday = useSelector(state => state.historyToday)
+
+
+    async function loadData() {
+        const dados = await getCaixa(user)
+        const amount = sumAmounts(dados)
+        dispatch(setHistory({
+            data: dados,
+            amount: amount
+        }))
+
+        dispatch(setLoading(false))
+    }
 
     useEffect(() => {
-        async function loadData() {
-            const dados = await getCaixa(user)
-            setData(dados)
-            sumAmounts(dados, setAmount)
+        dispatch(setLoading(true))
 
+        if (dataToday.data.length == 0) {
+            loadData()
+        } else {
             dispatch(setLoading(false))
         }
-
-        dispatch(setLoading(true))
-        loadData()
 
     }, [])
 
@@ -48,7 +55,7 @@ const Today = () => {
                 <h3 className="font-normal text-sm mb-[-10px]">Valor no caixa hoje</h3>
                 <NumericFormat
                     className="font-bold text-[42px] w-full text-center"
-                    value={amount}
+                    value={dataToday.amountToday}
                     prefix="R$"
                     decimalScale={2}
                     thousandSeparator="."
@@ -60,11 +67,13 @@ const Today = () => {
                     text="Adicionar Caixa"
                     icon={<Plus />}
                     style="!w-[180px]"
-                    action={() => { navigate('/add') }}
+                    action={() => {
+                        navigate('/add')
+                    }}
                 />
             </div>
             <div>
-                <PlaymentList data={data} />
+                <PlaymentList data={dataToday.data} />
             </div>
         </section>
     )

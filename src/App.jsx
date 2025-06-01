@@ -2,7 +2,6 @@ import { Outlet, useLocation } from "react-router-dom"
 import Header from "@components/others/Header"
 import Menu from "@components/others/Menu"
 import LoadinBlock from "@components/alerts/LoadinBlock"
-import { useState } from "react"
 import { useSelector } from "react-redux"
 
 function App() {

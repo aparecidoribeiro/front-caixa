@@ -1,6 +1,6 @@
 import { filterDate } from "@utils/filterDate"
 
-export const sumAmounts = (data, setAmount) => {
+export const sumAmounts = (data) => {
 
     const filterItems = filterDate(data)
 
@@ -10,5 +10,5 @@ export const sumAmounts = (data, setAmount) => {
         totalAmount += Number(item.amount)
     })
 
-    setAmount(totalAmount)
+    return totalAmount
 }

@@ -11,8 +11,9 @@ import { useSelector } from 'react-redux';
 
 //Features loading
 import { setLoading } from '@features/loading.js'
-
 import { useDispatch } from "react-redux";
+import { loadData } from '@utils/loadData';
+import { toast } from 'react-toastify';
 
 const AddCash = () => {
 
@@ -20,11 +21,11 @@ const AddCash = () => {
     const { goHome } = useNavigation()
 
     const [data, setData] = useState({
-        addCaixa: 0,
+        addCaixa: 0.00,
         payment_type: null,
         client: null,
-        addSheet: null,
-        description: null
+        addSheet: "",
+        description: ""
     })
 
     function clearInputs() {
@@ -32,8 +33,8 @@ const AddCash = () => {
             addCaixa: 0,
             payment_type: null,
             client: null,
-            addSheet: null,
-            description: undefined
+            addSheet: "",
+            description: ""
         })
     }
 
@@ -54,17 +55,41 @@ const AddCash = () => {
 
     const dispatch = useDispatch()
 
-    const addCash = async () => {
+    const verifyInputs = () => {
+        if (!valueSheet) {
+            if (data.addCaixa === 0 || data.payment_type === null) {
+                return "Preencha todos os campos."
+            }
+            return true
+        } else {
+            if (data.addCaixa === 0 || data.payment_type === null || data.client === null || data.addSheet === "" || data.description === "") {
+                return "Preencha todos os campos."
+            }
+            return true
+        }
+    }
+
+    const addCash = async (e) => {
+        e.preventDefault();
+
+        const result = verifyInputs()
+
+        if (result != true) {
+            return toast.error(result)
+        }
         dispatch(setLoading(true))
+
         await putCaixa(user, data)
-        dispatch(setLoading(false))
+        loadData(dispatch, user)
+
         clearInputs()
+        dispatch(setLoading(false))
     }
 
 
     return (
         <section className='flex flex-col gap-5 pt-5'>
-            <form action={addCash}>
+            <form onSubmit={addCash}>
                 <div>
                     <X
                         size={28}
@@ -91,7 +116,7 @@ const AddCash = () => {
                     />
                 </div>
                 <div className='flex flex-col gap-2'>
-                    <div>
+                    <div className='mt-4'>
                         <input
                             type="checkbox"
                             id="ficha"
@@ -136,7 +161,9 @@ const AddCash = () => {
                         </div>)}
                     <Button
                         text={"Adicionar ao caixar"}
-                        style={"mt-[30px]"} />
+                        style={"mt-[30px]"}
+                    />
+
                 </div>
             </form>
         </section>
