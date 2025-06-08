@@ -1,20 +1,29 @@
 import TypeCard from "@components/others/TypeCard"
-import { format, parseISO } from "date-fns"
+import { isSameDay, parse, parseISO, startOfDay } from "date-fns"
 
 import { CircleAlert } from 'lucide-react';
+import { useSelector } from "react-redux";
 
 const PlaymentList = (data) => {
 
-    const dateToday = format(new Date(), "dd/MM/yyyy")
+    const date = useSelector((state) => state.date)
 
     const arrayData = data.data
+    const arrayReverse = [...arrayData].reverse()
 
-    // const formatteTime = format(date, "HH:mm")
-    const filterDate = arrayData.filter(item => {
-        const date = parseISO(item.created_at)
-        const formatteDate = format(date, "dd/MM/yyyy")
+    const filterDate = arrayReverse.filter(item => {
+        const dateItem = startOfDay(parseISO(item.created_at))
+        const dateStart = parse(date.startDate, "dd/MM/yyyy", new Date())
+        const dateEnd = parse(date.endDate, "dd/MM/yyyy", new Date())
 
-        return formatteDate == dateToday
+
+        if (date.type == 'today') {
+            return isSameDay(dateItem, new Date())
+        }
+        else {
+            return dateItem >= dateStart && dateItem <= dateEnd
+        }
+
     })
 
     return (
@@ -22,6 +31,7 @@ const PlaymentList = (data) => {
             <h3 className="text-base">Histórico</h3>
             <div className="flex flex-col gap-2">
                 {
+
                     filterDate.length == 0 ?
                         <h1 className="flex items-center gap-1 text-sm ">
                             <CircleAlert size={16} /> Nenhum histórico de transação

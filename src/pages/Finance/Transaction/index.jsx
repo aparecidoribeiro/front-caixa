@@ -4,8 +4,10 @@ import Block from "@components/alerts/Block"
 import Calendar from '@components/inputs/Calendar'
 import InfoTransaction from '@components/others/InfoTransaction'
 import PlaymentList from '@components/others/PlaymentList'
+import { useSelector } from 'react-redux'
 
 const Trasaction = () => {
+
 
     const [block, setBlock] = useState(false)
 
@@ -29,8 +31,10 @@ const Trasaction = () => {
         }
     ]
 
+    const data = useSelector((state) => state.historyToday.data)
+
     return (
-        < section >
+        < section className='pb-[54px]'>
             <div>
                 <h3 className='text-xs'>Filtrar data</h3>
                 <FilterDate
@@ -38,7 +42,7 @@ const Trasaction = () => {
                 />
             </div>
             <InfoTransaction />
-            {/* <PlaymentList /> */}
+            <PlaymentList data={data} />
 
             {
                 block && (

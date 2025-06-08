@@ -3,6 +3,7 @@ import Header from "@components/others/Header"
 import Menu from "@components/others/Menu"
 import LoadinBlock from "@components/alerts/LoadinBlock"
 import { useSelector } from "react-redux"
+import { useEffect } from "react"
 
 function App() {
 
@@ -13,6 +14,10 @@ function App() {
 
   const loading = useSelector(state => state.loading.value)
 
+
+  useEffect(() => {
+    console.log("montou")
+  }, [])
 
   return (
     <div className="px-standard bg-background">

@@ -52,7 +52,7 @@ const Today = () => {
     return (
         <section className="flex flex-col gap-3 pb-[54px]">
             <div className="bg-white flex flex-col justify-center items-center gap-2 px-standard h-52 rounded-lg">
-                <h3 className="font-normal text-sm mb-[-10px]">Valor no caixa hoje</h3>
+                <h3 className="font-normal text-base mb-[-10px]">Valor no caixa hoje</h3>
                 <NumericFormat
                     className="font-bold text-[42px] w-full text-center"
                     value={dataToday.amountToday}
@@ -67,9 +67,7 @@ const Today = () => {
                     text="Adicionar Caixa"
                     icon={<Plus />}
                     style="!w-[180px]"
-                    action={() => {
-                        navigate('/add')
-                    }}
+                    action={() => navigate('/add')}
                 />
             </div>
             <div>
