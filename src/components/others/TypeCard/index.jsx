@@ -1,12 +1,12 @@
 import { format, parseISO } from 'date-fns';
 import { NumericFormat } from "react-number-format";
-import { ptBR } from 'date-fns/locale';
-import { ArrowRight } from 'lucide-react';
+import { ptBR, pt } from 'date-fns/locale';
 
 const TypeCard = ({ amount, paymentType, date }) => {
 
     const dateStandard = parseISO(date)
-    const formatteDate = format(dateStandard, "EEEE", { locale: ptBR })
+    const formatteDate = format(dateStandard, "dd/MM/yyyy", { locale: ptBR })
+    const formatteDay = format(dateStandard, 'EEE', { locale: pt })
     const formatteTime = format(dateStandard, "HH:mm")
 
     let formattePaymente
@@ -27,7 +27,6 @@ const TypeCard = ({ amount, paymentType, date }) => {
             break
     }
 
-    const daySweek = formatteDate.charAt(0).toUpperCase() + formatteDate.slice(1)
 
     return (
         <div className='grid grid-cols-[auto_1fr_auto]'>
@@ -40,7 +39,7 @@ const TypeCard = ({ amount, paymentType, date }) => {
             </div>
             <span className='col-start-2 ml-[6px]'>
                 <h4 className='flex items-center gap-1 text-sm font-normal'>Pagamento via: {formattePaymente}</h4>
-                <h3 className='text-[11px] italic'>{`${daySweek}, ${formatteTime}`}</h3>
+                <h3 className='text-[11px] italic'>{`${formatteDate} ${formatteDay}, ${formatteTime}`}</h3>
             </span>
             <NumericFormat
                 className='justify-end text-sm col-start-3'

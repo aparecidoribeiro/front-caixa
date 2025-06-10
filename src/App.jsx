@@ -1,9 +1,9 @@
-import { Outlet, useLocation } from "react-router-dom"
 import Header from "@components/others/Header"
 import Menu from "@components/others/Menu"
 import LoadinBlock from "@components/alerts/LoadinBlock"
+import AuthAuthorization from "@loaders/AuthAutorization"
+import { Outlet, useLocation } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { useEffect } from "react"
 
 function App() {
 
@@ -15,18 +15,16 @@ function App() {
   const loading = useSelector(state => state.loading.value)
 
 
-  useEffect(() => {
-    console.log("montou")
-  }, [])
-
   return (
     <div className="px-standard bg-background">
       {loading && (<LoadinBlock />)}
-      {pathname && <Header />}
-      <div>
-        <Outlet />
-      </div>
-      {pathname && <Menu />}
+      <AuthAuthorization>
+        {pathname && <Header />}
+        <div>
+          <Outlet />
+        </div>
+        {pathname && <Menu />}
+      </AuthAuthorization>
     </div>
   )
 }

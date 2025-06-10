@@ -1,5 +1,6 @@
 import api from "@services/api"
 
+
 export const getCaixa = async (user) => {
 
     let currentPage = 1
