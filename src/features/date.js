@@ -18,10 +18,13 @@ const dateSlice = createSlice({
             state.startDate = newStartDate,
                 state.endDate = newEndDate,
                 state.type = type
+        },
+        setType: (state, { payload: { type } }) => {
+            state.type = type
         }
     }
 })
 
 
-export const { setEndDate, setDates } = dateSlice.actions
+export const { setEndDate, setDates, setType } = dateSlice.actions
 export default dateSlice.reducer

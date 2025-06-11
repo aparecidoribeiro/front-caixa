@@ -9,11 +9,18 @@ const Finance = () => {
         {
             name: 'Hoje',
             route: '/',
-            end: true
+            end: true,
+            date: {
+                type: 'today'
+            }
         },
         {
             name: 'Movimentação',
-            route: '/movimentacao'
+            route: '/movimentacao',
+            date: {
+                type: 'interval',
+                interval: 7
+            }
         }
     ]
 

@@ -32,7 +32,6 @@ export const getCaixa = async (user) => {
 
     }
     catch (err) {
-        console.log(err)
         return []
     }
 

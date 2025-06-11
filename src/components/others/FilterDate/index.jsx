@@ -2,7 +2,6 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { setEndDate } from "@features/date"
 import { useSelector } from "react-redux"
-import { getCaixa } from "../../../pages/Finance/Today/actions/getCaixa"
 
 const FilterDate = ({ options }) => {
 
@@ -30,7 +29,7 @@ const FilterDate = ({ options }) => {
                                         newStartDate: item.date,
                                         type: "interval"
                                     }))
-                                    const dados = await getCaixa(user)
+                                    // await getCaixa(user)
                                 }
                             }}
                         >

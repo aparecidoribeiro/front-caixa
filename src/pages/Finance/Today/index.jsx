@@ -2,12 +2,10 @@ import { Plus } from 'lucide-react';
 import { useSelector } from "react-redux"
 import { NumericFormat } from 'react-number-format';
 import { useEffect } from "react";
-import { sumAmounts } from "@utils/sumAmounts";
 
 import Button from "@components/inputs/Button"
 import PlaymentList from "@components/others/PlaymentList"
 
-import { getCaixa } from "./actions/getCaixa";
 
 //Features loading
 import { setLoading } from '@features/loading.js'
@@ -15,7 +13,7 @@ import { setLoading } from '@features/loading.js'
 
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import { setHistory } from '@features/hitoryToday';
+import { loadData } from '@utils/loadData';
 
 
 const Today = () => {
@@ -27,14 +25,8 @@ const Today = () => {
     const dataToday = useSelector(state => state.historyToday)
 
 
-    async function loadData() {
-        const dados = await getCaixa(user)
-        const amount = sumAmounts(dados)
-        dispatch(setHistory({
-            data: dados,
-            amount: amount
-        }))
-
+    const fetchData = async () => {
+        await loadData(dispatch, user)
         dispatch(setLoading(false))
     }
 
@@ -42,7 +34,7 @@ const Today = () => {
         dispatch(setLoading(true))
 
         if (dataToday.data.length == 0) {
-            loadData()
+            fetchData()
         } else {
             dispatch(setLoading(false))
         }
@@ -71,7 +63,7 @@ const Today = () => {
                 />
             </div>
             <div>
-                <PlaymentList data={dataToday.data} />
+                <PlaymentList />
             </div>
         </section>
     )

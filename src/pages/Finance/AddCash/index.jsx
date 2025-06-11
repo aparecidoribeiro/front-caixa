@@ -69,6 +69,7 @@ const AddCash = () => {
         }
     }
 
+
     const addCash = async (e) => {
         e.preventDefault();
 
@@ -80,7 +81,7 @@ const AddCash = () => {
         dispatch(setLoading(true))
 
         await putCaixa(user, data)
-        loadData(dispatch, user)
+        await loadData(dispatch, user)
 
         clearInputs()
         dispatch(setLoading(false))
