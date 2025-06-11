@@ -10,7 +10,6 @@ import PlaymentList from "@components/others/PlaymentList"
 //Features loading
 import { setLoading } from '@features/loading.js'
 
-
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { loadData } from '@utils/loadData';
@@ -25,19 +24,21 @@ const Today = () => {
     const dataToday = useSelector(state => state.historyToday)
 
 
-    const fetchData = async () => {
-        await loadData(dispatch, user)
-        dispatch(setLoading(false))
-    }
 
     useEffect(() => {
         dispatch(setLoading(true))
+
+        const fetchData = async () => {
+            await loadData(dispatch, user)
+            dispatch(setLoading(false))
+        }
 
         if (dataToday.data.length == 0) {
             fetchData()
         } else {
             dispatch(setLoading(false))
         }
+
 
     }, [])
 

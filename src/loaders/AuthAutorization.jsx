@@ -4,14 +4,11 @@ import { setLoading } from "@features/loading";
 import { logout } from "@features/auth"
 
 import api from "@services/api";
-import { useState } from "react";
 
 
 const AuthAuthorization = ({ children }) => {
 
     const user = JSON.parse(localStorage.getItem('user'))
-
-    const [userAuth, setUserAuth] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -32,14 +29,11 @@ const AuthAuthorization = ({ children }) => {
                             'Content-Type': 'application/json'
                         }
                     })
-                    setUserAuth(true)
-                    dispatch(setLoading(false))
                 }
                 catch (err) {
                     dispatch(logout())
                 }
 
-                dispatch(setLoading(false))
             }
         }
 
@@ -48,7 +42,7 @@ const AuthAuthorization = ({ children }) => {
     }, [])
 
 
-    return userAuth ? children : ""
+    return children
 }
 
 export default AuthAuthorization;

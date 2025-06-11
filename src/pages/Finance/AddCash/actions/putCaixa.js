@@ -1,7 +1,7 @@
 import api from "@services/api"
 import { toast } from "react-toastify"
 
-export const putCaixa = (user, { addCaixa, payment_type, client, addSheet, }) => {
+export const putCaixa = (user, { addCaixa, payment_type, client, addSheet }) => {
 
 
     return api({

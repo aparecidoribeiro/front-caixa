@@ -1,7 +1,6 @@
 import TypeCard from "@components/others/TypeCard"
 import { isSameDay, parse, parseISO, startOfDay } from "date-fns"
 import { CircleAlert } from 'lucide-react';
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const PlaymentList = () => {
@@ -20,19 +19,14 @@ const PlaymentList = () => {
         const dateEnd = parse(date.endDate, "dd/MM/yyyy", new Date())
 
 
-        if (date.type == 'today') {
+        if (date.type === 'today') {
             return isSameDay(dateItem, new Date())
         }
         else {
             return dateItem >= dateStart && dateItem <= dateEnd
         }
-
     })
 
-
-    useEffect(() => {
-        // console.log(dados)
-    }, [])
 
     return (
         <div className="w-full bg-white p-5 rounded-lg flex flex-col gap-2 mb-5">
