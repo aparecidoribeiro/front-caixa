@@ -14,31 +14,38 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { loadData } from '@utils/loadData';
 
+import { setFilterData } from "@features/transactions";
+import { filterDate } from '@pages/Finance/actions/filterDate';
 
 const Today = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    const date = useSelector(state => state.date)
     const user = useSelector(state => state.auth.user)
-    const dataToday = useSelector(state => state.historyToday)
+    const transactions = useSelector(state => state.transactions)
 
+    const arrayData = transactions.data
 
 
     useEffect(() => {
         dispatch(setLoading(true))
 
+        
         const fetchData = async () => {
             await loadData(dispatch, user)
             dispatch(setLoading(false))
         }
-
-        if (dataToday.data.length == 0) {
+        
+        if (transactions.data.length == 0) {
             fetchData()
         } else {
             dispatch(setLoading(false))
         }
-
+        
+        const array = filterDate(arrayData, date)
+        dispatch(setFilterData(array))
 
     }, [])
 
@@ -48,7 +55,7 @@ const Today = () => {
                 <h3 className="font-normal text-base mb-[-10px]">Valor no caixa hoje</h3>
                 <NumericFormat
                     className="font-bold text-[42px] w-full text-center"
-                    value={dataToday.amountToday}
+                    value={transactions.today.amount}
                     prefix="R$"
                     decimalScale={2}
                     thousandSeparator="."

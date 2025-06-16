@@ -5,6 +5,8 @@ import { logout } from "@features/auth"
 
 import api from "@services/api";
 
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 const AuthAuthorization = ({ children }) => {
 
@@ -12,8 +14,14 @@ const AuthAuthorization = ({ children }) => {
 
     const dispatch = useDispatch()
 
+
+    const location = useLocation()
+    const navigation = useNavigate()
+
+
     useEffect(() => {
         dispatch(setLoading(false))
+
 
         const checkAuth = async () => {
             if (user) {
@@ -29,9 +37,14 @@ const AuthAuthorization = ({ children }) => {
                             'Content-Type': 'application/json'
                         }
                     })
-                }
-                catch (err) {
+                } catch (err) {
                     dispatch(logout())
+                } finally {
+                    if (location.pathname !== "/") {
+                        navigation('/')
+                        dispatch(setLoading(false))
+
+                    }
                 }
 
             }

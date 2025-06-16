@@ -1,6 +1,6 @@
 
 
-import { setHistory } from '@features/hitoryToday';
+import { setHistory } from '@features/transactions';
 import { sumAmounts } from "@utils/sumAmounts";
 import { getCaixa } from "@services/getCaixa"
 

@@ -1,13 +1,17 @@
-import { useState } from 'react'
 import FilterDate from '@components/others/FilterDate'
 import Block from "@components/alerts/Block"
 import Calendar from '@components/inputs/Calendar'
 import InfoTransaction from '@components/others/InfoTransaction'
 import PlaymentList from '@components/others/PlaymentList'
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { setFilterData } from "@features/transactions";
+import { filterDate } from '@pages/Finance/actions/filterDate';
+
 
 const Trasaction = () => {
-
 
     const [block, setBlock] = useState(false)
 
@@ -31,7 +35,16 @@ const Trasaction = () => {
         }
     ]
 
-    const data = useSelector((state) => state.historyToday.data)
+    const dispatch = useDispatch()
+
+    const date = useSelector(state => state.date)
+    const transactions = useSelector(state => state.transactions)
+    const arrayData = transactions.data
+
+    useEffect(() => {
+        const array = filterDate(arrayData, date)
+        dispatch(setFilterData(array))
+    }, [date])
 
     return (
         < section className='pb-[54px]'>
@@ -42,7 +55,7 @@ const Trasaction = () => {
                 />
             </div>
             <InfoTransaction />
-            <PlaymentList data={data} />
+            <PlaymentList />
 
             {
                 block && (

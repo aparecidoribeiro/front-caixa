@@ -1,10 +1,11 @@
+import { NumericFormat } from "react-number-format"
 import { useSelector } from "react-redux"
 
 
 const InfoTransaction = () => {
 
+    const transactionsFilter = useSelector(state => state.transactions.filter)
     const date = useSelector(state => state.date)
-
     const startDate = date.startDate
     const endDate = date.endDate
 
@@ -17,10 +18,54 @@ const InfoTransaction = () => {
             </div>
             <div className="text-center">
                 <h3 className="text-base">Movimentação em caixa</h3>
-                <p className="text-sm font-light">Pix: <strong>R$0,00</strong></p>
-                <p className="text-sm font-light">Cartão: <strong>R$0,00</strong></p>
-                <p className="text-sm font-light">Dinheiro: <strong>R$0,00</strong></p>
-                <p className="text-sm font-light">Total em Produtos: <strong>R$0,00</strong></p>
+                <p className="text-sm font-light">Dinheiro: <strong>
+                    <NumericFormat
+                        className='justify-end text-sm col-start-3'
+                        value={0}
+                        prefix="R$"
+                        decimalScale={2}
+                        thousandSeparator="."
+                        decimalSeparator=","
+                        displayType="text"
+                        fixedDecimalScale
+                    />
+                </strong></p>
+                <p className="text-sm font-light">Pix: <strong>
+                    <NumericFormat
+                        className='justify-end text-sm col-start-3'
+                        value={0}
+                        prefix="R$"
+                        decimalScale={2}
+                        thousandSeparator="."
+                        decimalSeparator=","
+                        displayType="text"
+                        fixedDecimalScale
+                    />
+                </strong></p>
+                <p className="text-sm font-light">Cartão: <strong>
+                    <NumericFormat
+                        className='justify-end text-sm col-start-3'
+                        value={0}
+                        prefix="R$"
+                        decimalScale={2}
+                        thousandSeparator="."
+                        decimalSeparator=","
+                        displayType="text"
+                        fixedDecimalScale
+                    />
+                </strong></p>
+                <p className="text-sm font-light">Total em Produtos: <strong>
+                    <NumericFormat
+                        className='justify-end text-sm col-start-3'
+                        value={0}
+                        prefix="R$"
+                        decimalScale={2}
+                        thousandSeparator="."
+                        decimalSeparator=","
+                        displayType="text"
+                        fixedDecimalScale
+                    />
+                </strong></p>
             </div>
         </div>
     )

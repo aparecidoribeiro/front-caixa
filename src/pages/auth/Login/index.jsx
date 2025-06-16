@@ -55,10 +55,8 @@ const Login = () => {
                     expiration: response.data.expiration
                 }
 
-
-                console.log(response)
                 dispatch(login(dataUser))
-            }).catch((erro) => {
+            }).catch((err) => {
                 toast.error('Email ou senha incorreto')
                 dispatch(setLoading(false))
             }).finally(() => {
