@@ -7,10 +7,7 @@ const initialState = {
         amount: 0
     },
     filter: {
-        data: [],
-        money: 0,
-        pix: 0,
-        card: 0
+        data: []
     }
 }
 
