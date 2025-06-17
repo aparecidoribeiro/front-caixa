@@ -28,26 +28,26 @@ const Today = () => {
 
     const arrayData = transactions.data
 
-
     useEffect(() => {
         dispatch(setLoading(true))
 
-        
         const fetchData = async () => {
             await loadData(dispatch, user)
             dispatch(setLoading(false))
         }
-        
+
         if (transactions.data.length == 0) {
             fetchData()
         } else {
             dispatch(setLoading(false))
         }
-        
-        const array = filterDate(arrayData, date)
-        dispatch(setFilterData(array))
 
     }, [])
+
+    useEffect(() => {
+        const array = filterDate(arrayData, date)
+        dispatch(setFilterData(array))
+    }, [arrayData])
 
     return (
         <section className="flex flex-col gap-3 pb-[54px]">

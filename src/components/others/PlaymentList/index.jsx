@@ -6,7 +6,7 @@ const PlaymentList = () => {
 
     const transactionsFilter = useSelector(state => state.transactions.filter)
 
-    console.log(transactionsFilter)
+    // console.log(transactionsFilter)
 
     return (
         <div className="w-full bg-white p-5 rounded-lg flex flex-col gap-2 mb-5">
