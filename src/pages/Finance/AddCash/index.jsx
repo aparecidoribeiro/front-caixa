@@ -106,6 +106,7 @@ const AddCash = () => {
                         value={data.addCaixa}
                         name={'addCaixa'}
                         action={setData}
+                        placeholder={false}
                     />
                     <InputSelect
                         label={"Forma de pagamento"}

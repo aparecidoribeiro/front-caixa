@@ -47,15 +47,17 @@ const Trasaction = () => {
     }, [date])
 
     return (
-        < section className='pb-[54px]'>
-            <div>
-                <h3 className='text-xs'>Filtrar data</h3>
-                <FilterDate
-                    options={options}
-                />
+        < section className="pb-[54px]">
+            <div className={`${block ? "pointer-events-none" : ""}`}>
+                <div>
+                    <h3 className='text-xs'>Filtrar data</h3>
+                    <FilterDate
+                        options={options}
+                    />
+                </div>
+                <InfoTransaction />
+                <PlaymentList />
             </div>
-            <InfoTransaction />
-            <PlaymentList />
 
             {
                 block && (
