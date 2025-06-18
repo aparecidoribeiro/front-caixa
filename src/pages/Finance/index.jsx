@@ -20,7 +20,7 @@ const Finance = () => {
             date: {
                 type: 'interval',
                 interval: 7
-            }
+            } 
         }
     ]
 

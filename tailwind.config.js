@@ -12,6 +12,7 @@ export default {
         'black-opacity': '#0006',
         'primary': '#FA9B2F',
         'white': '#FFF',
+        'white-two': '#EDEFF1',
         'green': '#D3FAF6',
         'placerhold-color': '#808080',
         'border-color': '#CCC',
