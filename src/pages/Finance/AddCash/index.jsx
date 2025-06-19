@@ -80,8 +80,14 @@ const AddCash = () => {
         }
         dispatch(setLoading(true))
 
-        await putCaixa(user, data)
+        const response = await putCaixa(user, data)
         await loadData(dispatch, user)
+
+        if (response) {
+            toast.success("Valor adicionado ao caixa")
+        } else {
+            toast.error("Erro ao adicionar valor")
+        }
 
         clearInputs()
         dispatch(setLoading(false))
@@ -106,7 +112,7 @@ const AddCash = () => {
                         value={data.addCaixa}
                         name={'addCaixa'}
                         action={setData}
-                        placeholder={false}
+                        placeholder={"false"}
                     />
                     <InputSelect
                         label={"Forma de pagamento"}

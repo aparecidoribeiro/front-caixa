@@ -18,13 +18,13 @@ function App() {
   return (
     <div className="px-standard bg-background">
       {loading && (<LoadinBlock />)}
-      {/* <AuthAuthorization> */}
+      <AuthAuthorization>
         {pathname && <Header />}
         <div>
           <Outlet />
         </div>
         {pathname && <Menu />}
-      {/* </AuthAuthorization> */}
+      </AuthAuthorization>
     </div>
   )
 }

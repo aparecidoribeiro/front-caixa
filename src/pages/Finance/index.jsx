@@ -1,9 +1,12 @@
 import Submenu from "@components/others/Submenu"
 import { Outlet, useLocation } from "react-router-dom"
 
-const Finance = () => {
+import { loadData } from '@utils/loadData';
+import { setLoading } from '@features/loading.js'
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 
-    const location = useLocation()
+const Finance = () => {
 
     const options = [
         {
@@ -20,9 +23,31 @@ const Finance = () => {
             date: {
                 type: 'interval',
                 interval: 7
-            } 
+            }
         }
     ]
+
+    const dispatch = useDispatch()
+    const location = useLocation()
+
+    const user = useSelector(state => state.auth.user)
+    const transactions = useSelector(state => state.transactions.data)
+
+    const fetchData = async () => {
+        await loadData(dispatch, user)
+        dispatch(setLoading(false))
+    }
+
+    useEffect(() => {
+        dispatch(setLoading(true))
+
+        if (transactions.length == 0) {
+            fetchData()
+        } else {
+            dispatch(setLoading(false))
+        }
+
+    }, [])
 
     return (
         <section>

@@ -6,13 +6,8 @@ import { useEffect } from "react";
 import Button from "@components/inputs/Button"
 import PlaymentList from "@components/others/PlaymentList"
 
-
-//Features loading
-import { setLoading } from '@features/loading.js'
-
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import { loadData } from '@utils/loadData';
 
 import { setFilterData } from "@features/transactions";
 import { filterDate } from '@pages/Finance/actions/filterDate';
@@ -23,31 +18,14 @@ const Today = () => {
     const navigate = useNavigate()
 
     const date = useSelector(state => state.date)
-    const user = useSelector(state => state.auth.user)
     const transactions = useSelector(state => state.transactions)
 
-    const arrayData = transactions.data
+    const arrayTransactions = transactions.data
 
     useEffect(() => {
-        // dispatch(setLoading(true))
-
-        const fetchData = async () => {
-            await loadData(dispatch, user)
-            dispatch(setLoading(false))
-        }
-
-        if (transactions.data.length == 0) {
-            // fetchData()
-        } else {
-            dispatch(setLoading(false))
-        }
-
-    }, [])
-
-    useEffect(() => {
-        const array = filterDate(arrayData, date)
+        const array = filterDate(arrayTransactions, date)
         dispatch(setFilterData(array))
-    }, [arrayData])
+    }, [arrayTransactions])
 
     return (
         <section className="flex flex-col gap-3 pb-[54px]">

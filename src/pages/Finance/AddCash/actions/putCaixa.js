@@ -19,10 +19,11 @@ export const putCaixa = (user, { addCaixa, payment_type, client, addSheet }) => 
         }
     })
         .then((response) => {
-            return toast.success(response.data.message)
+            return true
         })
         .catch((err) => {
             console.log(err)
+            return false
         })
 
 }

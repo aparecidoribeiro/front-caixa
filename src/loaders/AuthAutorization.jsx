@@ -39,12 +39,6 @@ const AuthAuthorization = ({ children }) => {
                     })
                 } catch (err) {
                     dispatch(logout())
-                } finally {
-                    if (location.pathname !== "/") {
-                        navigation('/')
-                        dispatch(setLoading(false))
-
-                    }
                 }
 
             }
