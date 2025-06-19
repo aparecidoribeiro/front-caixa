@@ -8,18 +8,15 @@ const Header = () => {
 
     let Route = "Caixa"
 
-    switch (location.pathname) {
-        case "/":
-            Route = "Caixa"
-            break
-        case "/produtos":
-            Route = "Produtos"
-            break
-        case "/fichas":
-            Route = "Fichas"
-            break
-    }
+    const path = location.pathname
 
+    if (path == "/" || path == "/movimentacao") {
+        Route = "Caixa"
+    } else if (path.startsWith('/produtos')) {
+        Route = "Produtos"
+    } else if (path.startsWith('/fichas')) {
+        Route = "Fichas"
+    }
 
     return (
         <header className="relative flex items-center justify-between pt-5 mb-5 gap-3 z-20">
