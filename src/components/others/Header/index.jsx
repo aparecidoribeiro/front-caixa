@@ -1,5 +1,5 @@
 import Avatar from "@components/others/Avatar"
-import { useLocation } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import CartIcon from "@components/others/CartIcon"
 
 const Header = () => {
@@ -25,7 +25,9 @@ const Header = () => {
                 <span className="text-lg font-normal">{Route}</span>
             </div>
             {Route == 'Produtos' && (
-                <CartIcon />
+                <NavLink to={'/'}>
+                    <CartIcon />
+                </NavLink>
             )}
         </header>
     )

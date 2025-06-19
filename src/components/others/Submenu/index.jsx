@@ -1,9 +1,15 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import { setType, setEndDate } from "@features/date"
 import { useDispatch } from "react-redux"
+import { TestTube2Icon } from "lucide-react"
 
 
 const Submenu = ({ options }) => {
+
+    const location = useLocation()
+
+    //Verificar se está na rota do caixa para pode ativar o onClick 
+    const isRoute = location.pathname == "/" || location.pathname == "/movimentacao"
 
     const dispatch = useDispatch()
 
@@ -29,14 +35,16 @@ const Submenu = ({ options }) => {
                                 return `px-2 py-1 rounded-xl 
                                 ${isActive ? 'bg-black-one text-white' : 'bg-white text-black-one'}`
                             }}
-                            onClick={() => setInterval(item)}
+                            onClick={() => {
+                                isRoute ? setInterval(item) : ""
+                            }}
                         >
                             {item.name}
                         </NavLink>
                     )
                 })
             }
-        </nav>
+        </nav >
     )
 }
 

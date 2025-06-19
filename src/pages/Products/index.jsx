@@ -12,7 +12,7 @@ const Products = () => {
         },
         {
             name: 'Indisponiveis',
-            route: '/',
+            route: '/produtos/indisponiveis',
         },
         {
             name: 'Adicionar novos',

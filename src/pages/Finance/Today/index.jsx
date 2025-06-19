@@ -29,7 +29,7 @@ const Today = () => {
     const arrayData = transactions.data
 
     useEffect(() => {
-        dispatch(setLoading(true))
+        // dispatch(setLoading(true))
 
         const fetchData = async () => {
             await loadData(dispatch, user)
@@ -37,7 +37,7 @@ const Today = () => {
         }
 
         if (transactions.data.length == 0) {
-            fetchData()
+            // fetchData()
         } else {
             dispatch(setLoading(false))
         }

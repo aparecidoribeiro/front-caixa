@@ -16,6 +16,8 @@ import Sheet from '../pages/Sheet'
 
 //Loaders
 import { authLoader } from '../loaders/authLoader'
+import Available from '../pages/Products/Available'
+import Unavailable from '../pages/Products/Unavailable'
 
 
 export const router = createBrowserRouter([
@@ -34,13 +36,17 @@ export const router = createBrowserRouter([
                 ]
             },
             {
-                path: 'add',
-                element: <AddCash />,
-                loader: authLoader
-            },
-            {
                 path: 'produtos',
                 element: <Products />,
+                loader: authLoader,
+                children: [
+                    { index: true, element: <Available /> },
+                    { path: 'indisponiveis', element: <Unavailable /> }
+                ]
+            },
+            {
+                path: 'add',
+                element: <AddCash />,
                 loader: authLoader
             },
             {
