@@ -6,7 +6,7 @@ const DropdownMenu = () => {
             < details className="dropdown" >
                 <summary className="btn p-0 h-auto border-none shadow-none bg-transparent ">
                     <EllipsisVertical
-                        color="#FA9B2F"
+                        color="#393A3E"
                         size={22}
                     />
                 </summary>
