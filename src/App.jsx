@@ -9,7 +9,7 @@ function App() {
 
   const location = useLocation()
 
-  const hiddenRoutes = ['/login', '/register', '/reset-password', '/forgot', '/add']
+  const hiddenRoutes = ['/login', '/register', '/reset-password', '/forgot', '/add', '/produtos/carrinho']
   const pathname = !hiddenRoutes.includes(location.pathname)
 
   const loading = useSelector(state => state.loading.value)
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="px-standard bg-background">
-      {loading && (<LoadinBlock />)}
+      {loading && <LoadinBlock />}
       <AuthAuthorization>
         {pathname && <Header />}
         <div>

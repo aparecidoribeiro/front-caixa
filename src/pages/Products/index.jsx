@@ -1,6 +1,6 @@
 import Submenu from "@components/others/Submenu"
 import Search from "@components/inputs/Search"
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { loadProducts } from "@utils/loadProducts"
@@ -20,7 +20,7 @@ const Products = () => {
             route: '/produtos/indisponiveis',
         },
         {
-            name: 'Adicionar novos',
+            name: 'Adicionar novo',
             route: '/',
         }
     ]
@@ -45,11 +45,19 @@ const Products = () => {
         }
     }, [])
 
+    const location = useLocation()
+    const hiddenRoutes = ['/produtos/carrinho']
+    const pathname = !hiddenRoutes.includes(location.pathname)
+
     return (
         <section>
-            <Search />
-            <Submenu options={options} />
-            <div className="mt-2">
+            {pathname && (
+                <div>
+                    <Search />
+                    <Submenu options={options} />
+                </div>
+            )}
+            <div>
                 <Outlet />
             </div>
         </section>

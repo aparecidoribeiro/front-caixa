@@ -25,7 +25,7 @@ const Header = () => {
                 <span className="text-lg font-normal">{Route}</span>
             </div>
             {Route == 'Produtos' && (
-                <NavLink to={'/'}>
+                <NavLink to={'/produtos/carrinho'}>
                     <CartIcon />
                 </NavLink>
             )}

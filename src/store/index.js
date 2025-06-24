@@ -5,6 +5,7 @@ import dateSlice from '@features/date.js'
 import loadingSlice from '@features/loading.js'
 import transactionsSlice from '@features/transactions.js'
 import productsSlice from '@features/products.js'
+import cartSlice from '@features/cart.js'
 
 export default configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export default configureStore({
         date: dateSlice,
         loading: loadingSlice,
         transactions: transactionsSlice,
-        products: productsSlice
+        products: productsSlice,
+        cart: cartSlice
     }
 })

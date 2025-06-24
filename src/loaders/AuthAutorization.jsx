@@ -30,7 +30,7 @@ const AuthAuthorization = ({ children }) => {
                 try {
                     await api({
                         method: 'get',
-                        url: `transactions`,
+                        url: `auth/validate`,
                         headers: {
                             'Accept': 'application/json',
                             'Authorization': `Bearer ${user.token}`,

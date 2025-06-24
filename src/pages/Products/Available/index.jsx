@@ -30,6 +30,7 @@ const Available = () => {
                             description={item.description}
                             price={item.price}
                             quantity={item.quantity}
+                            id={item.id}
                         />
                     )
                 })
@@ -41,6 +42,7 @@ const Available = () => {
                             description={item.description}
                             price={item.price}
                             quantity={item.quantity}
+                            id={item.id}
                         />
                     )
                 })

@@ -1,10 +1,21 @@
 import { NumericFormat } from "react-number-format"
 import { ShoppingCart } from 'lucide-react';
 import DropdownMenu from "../DropdownMenu";
+import { useDispatch } from "react-redux";
+import { setCart } from "@features/cart";
 
-const ProductCard = ({ name, description, price, quantity }) => {
+const ProductCard = ({ name, description, price, quantity, id }) => {
+
+    //Função para adicinar produtos ao carrinho
+
+    const dispatch = useDispatch()
+
+    const addCart = () => {
+        dispatch(setCart(id))
+    }
+
     return (
-        <div className="grid grid-cols-[1fr,3fr,1fr] grid-rows-1s gap-2 bg-white p-2">
+        <div className="w-full grid grid-cols-[1fr,3fr,1fr] grid-rows-1s gap-2 bg-white p-2">
             <div className="w-[70px] h-[70px] relative">
                 <DropdownMenu />
                 <img
@@ -29,11 +40,11 @@ const ProductCard = ({ name, description, price, quantity }) => {
             <div className="flex flex-col items-center gap-1">
                 <p className="text-[10px]">Disp: {quantity}</p>
                 <button
-                    className="bg-primary p-2 flex justify-center rounded-md w-full"
-                    onClick={() => console.log("Adicionado ao Carrinho")}
+                    className="bg-primary p-2 flex justify-center items-center rounded-[4px] w-full max-w-10 h-7"
+                    onClick={addCart}
                 >
                     <ShoppingCart
-                        size={20}
+                        size={18}
                         color="#fff"
                     />
                 </button>

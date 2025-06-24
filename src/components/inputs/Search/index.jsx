@@ -31,7 +31,7 @@ const Search = () => {
 
 
     return (
-        <div className="mb-4 flex w-full h-9 rounded-full items-center bg-white-two relative px-3 
+        <div className="mb-4 flex w-full h-8 rounded-full items-center bg-white-two relative px-3 
         border border-placerhold-color">
             <input
                 className='bg-transparent outline-none w-[90%] text-base text-black-one placeholder:text-black-one'

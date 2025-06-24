@@ -5,7 +5,8 @@ const useNavigation = () => {
     const navigate = useNavigate()
 
     return {
-        goHome: () => navigate('/')
+        goHome: () => navigate('/'), 
+        returnRoute: () => navigate(-1)
     }
 }
 
