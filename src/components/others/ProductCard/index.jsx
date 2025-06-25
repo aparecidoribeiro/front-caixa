@@ -1,17 +1,26 @@
 import { NumericFormat } from "react-number-format"
 import { ShoppingCart } from 'lucide-react';
 import DropdownMenu from "../DropdownMenu";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "@features/cart";
+import { toast } from "react-toastify";
 
 const ProductCard = ({ name, description, price, quantity, id }) => {
 
-    //Função para adicinar produtos ao carrinho
 
     const dispatch = useDispatch()
+    const cart = useSelector(state => state.cart.data)
 
+    //Função para adicinar produtos ao carrinho
     const addCart = () => {
-        dispatch(setCart(id))
+        //Verificar ser o produto ja foi adicionado ao carrinho
+        const verify = cart.some((item) => item.id === id)
+
+        if (verify) {
+            toast.error("Esse produto já está no carrinho")
+        } else {
+            dispatch(setCart(id))
+        }
     }
 
     return (
