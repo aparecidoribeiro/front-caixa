@@ -2,26 +2,41 @@ import { NumericFormat } from "react-number-format"
 import { ShoppingCart, Trash2 } from 'lucide-react';
 import DropdownMenu from "../DropdownMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart, removeCart } from "@features/cart";
+import { setCart, removeCart, setQuantity } from "@features/cart";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
-const ProductCard = ({ name, description, price, quantity, id }) => {
 
+
+const ProductCard = ({ name, description, price, quantity, id, quantitySelect }) => {
 
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart.data)
+    const products = useSelector(state => state.products.data)
+
+
+    const changeSelect = (e) => {
+
+        const quantitySelect = Number(e.target.value)
+
+        dispatch(setQuantity(
+            {
+                id: id,
+                quantity: quantitySelect
+            })
+        )
+    }
 
     //Função para adicinar produtos ao carrinho
     const addCart = () => {
         //Verificar ser o produto ja foi adicionado ao carrinho
-        const verify = cart.some((item) => item.id === id)
+        const verify = cart.some((item) => item.item.id === id)
 
         if (verify) {
             toast.error("Esse produto já está no carrinho")
         } else {
-            dispatch(setCart(id))
+            const filter = products.filter(product => product.id == id)
+            dispatch(setCart(...filter))
         }
     }
 
@@ -85,7 +100,10 @@ const ProductCard = ({ name, description, price, quantity, id }) => {
                 </div>
                     //Botão do carrinho
                     : <div className="text-center flex flex-col gap-2 w-[50px]">
-                        <select className="bg-white outline-none border w-full">
+                        <select className="bg-white outline-none border w-full"
+                            value={quantitySelect}
+                            onChange={changeSelect}
+                        >
                             {
                                 Array.from({ length: quantity }, (_, i) => (
                                     <option key={i + 1} value={i + 1}>{i + 1}</option>
