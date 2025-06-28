@@ -9,7 +9,6 @@ const CartIcon = () => {
     const cart = useSelector(state => state.cart.data)
 
     useEffect(() => {
-        console.log(cart)
     }, [cart])
 
     return (

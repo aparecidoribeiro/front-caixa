@@ -14,9 +14,9 @@ const PlaymentList = () => {
             <div className="flex flex-col gap-2">
                 {
                     transactionsFilter.data.length === 0 ?
-                        <h1 className="flex items-center gap-1 text-sm ">
+                        <h2 className="flex items-center gap-1 text-sm ">
                             <CircleAlert size={16} /> Nenhum histórico de transação
-                        </h1>
+                        </h2>
                         :
                         transactionsFilter.data.map((item) => {
                             return (
