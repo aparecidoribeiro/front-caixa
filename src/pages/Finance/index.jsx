@@ -51,8 +51,8 @@ const Finance = () => {
 
     return (
         <section>
-            {location.pathname != '/add' && <Submenu options={options} />}
-            <div className="mt-2">
+            {location.pathname != '/adicionar' && <Submenu options={options} />}
+            <div>
                 <Outlet />
             </div>
         </section >

@@ -49,14 +49,16 @@ const Trasaction = () => {
     return (
         < section className="pb-[54px]">
             <div className={`${block ? "pointer-events-none" : ""}`}>
-                <div>
+                <div className='mt-3'>
                     <h3 className='text-xs'>Filtrar data</h3>
                     <FilterDate
                         options={options}
                     />
                 </div>
-                <InfoTransaction />
-                <PlaymentList />
+                <div className='flex flex-col gap-3'>
+                    <InfoTransaction />
+                    <PlaymentList />
+                </div>
             </div>
 
             {

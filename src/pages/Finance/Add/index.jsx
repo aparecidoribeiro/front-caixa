@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import { loadData } from '@utils/loadData';
 import { toast } from 'react-toastify';
 
-const AddCash = () => {
+const Add = () => {
 
     const [valueSheet, setValueSheet] = useState(false)
     const { goHome } = useNavigation()
@@ -178,4 +178,4 @@ const AddCash = () => {
     )
 }
 
-export default AddCash
+export default Add

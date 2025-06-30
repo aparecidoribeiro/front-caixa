@@ -45,7 +45,7 @@ const Today = () => {
                     text="Adicionar Caixa"
                     icon={<Plus />}
                     style="!w-[180px]"
-                    action={() => navigate('/add')}
+                    action={() => navigate('/adicionar')}
                 />
             </div>
             <div>

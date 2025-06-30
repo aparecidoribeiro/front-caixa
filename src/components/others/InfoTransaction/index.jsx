@@ -53,7 +53,7 @@ const InfoTransaction = () => {
     }, [transactionsFilter])
 
     return (
-        <div className="bg-white flex flex-col gap-1 justify-center items-center rounded-lg p-4 mt-5 text-center">
+        <div className="bg-white flex flex-col gap-1 justify-center items-center rounded-lg p-4 mt-3 text-center">
             <div className="flex flex-col gap-2">
                 <h2 className="font-normal text-xl mb-[-10px]">Total em caixa</h2>
                 <NumericFormat

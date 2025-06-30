@@ -9,7 +9,7 @@ function App() {
 
   const location = useLocation()
 
-  const hiddenRoutes = ['/login', '/register', '/reset-password', '/forgot', '/add', '/produtos/carrinho']
+  const hiddenRoutes = ['/login', '/register', '/reset-password', '/forgot', '/adicionar', '/produtos/carrinho']
   const pathname = !hiddenRoutes.includes(location.pathname)
 
   const loading = useSelector(state => state.loading.value)

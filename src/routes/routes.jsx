@@ -14,7 +14,7 @@ import NotFound from '../pages/Error/NotFound'
 import Finance from '../pages/Finance'
 import Today from '../pages/Finance/Today'
 import Transaction from '../pages/Finance/Transaction'
-import AddCash from '../pages/Finance/AddCash'
+import AddTransations from '../pages/Finance/Add'
 
 
 //Páginas de Produtos
@@ -22,6 +22,8 @@ import Products from '../pages/Products'
 import Available from '../pages/Products/Available'
 import Unavailable from '../pages/Products/Unavailable'
 import Cart from '../pages/Products/Cart'
+import AddProducts from '../pages/Products/Add'
+
 
 //Páginas de fichas
 import Sheet from '../pages/Sheet'
@@ -39,6 +41,7 @@ export const router = createBrowserRouter([
                 children: [
                     { index: true, element: <Today /> },
                     { path: 'movimentacao', element: <Transaction /> },
+                    { path: 'adicionar', element: <AddTransations /> },
                 ]
             },
             {
@@ -49,12 +52,8 @@ export const router = createBrowserRouter([
                     { index: true, element: <Available /> },
                     { path: 'indisponiveis', element: <Unavailable /> },
                     { path: 'carrinho', element: <Cart /> },
+                    { path: 'adicionar', element: <AddProducts /> }
                 ]
-            },
-            {
-                path: 'add',
-                element: <AddCash />,
-                loader: authLoader
             },
             {
                 path: 'fichas',

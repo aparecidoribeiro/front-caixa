@@ -21,7 +21,7 @@ const Products = () => {
         },
         {
             name: 'Adicionar novo',
-            route: '/',
+            route: '/produtos/adicionar',
         }
     ]
 

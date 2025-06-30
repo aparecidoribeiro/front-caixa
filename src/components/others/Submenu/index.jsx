@@ -25,7 +25,7 @@ const Submenu = ({ options }) => {
     }
 
     return (
-        <nav className="text-[12px] flex gap-3">
+        <nav className="text-[12px] flex gap-3 mb-3">
             {
                 options.map((item) => {
 
