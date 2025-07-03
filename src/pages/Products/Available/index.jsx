@@ -20,33 +20,35 @@ const Available = () => {
     }
 
     return (
-        <section className="flex flex-col gap-2 mt-5 pb-[54px] items-center">
-            {arrayFilter.length > 0 ?
-                arrayFilter.map(item => {
-                    return (
-                        <ProductCard
-                            key={item.id}
-                            name={item.name}
-                            description={item.description}
-                            price={item.price}
-                            quantity={item.quantity}
-                            id={item.id}
-                        />
-                    )
-                })
-                : arrayProducts.map(item => {
-                    return (
-                        <ProductCard
-                            key={item.id}
-                            name={item.name}
-                            description={item.description}
-                            price={item.price}
-                            quantity={item.quantity}
-                            id={item.id}
-                        />
-                    )
-                })
-            }
+        <section className="h-auto flex flex-col pb-[54px] gap-2 mt-5 items-center">
+            <div className="mb-5">
+                {arrayFilter.length > 0 ?
+                    arrayFilter.map(item => {
+                        return (
+                            <ProductCard
+                                key={item.id}
+                                name={item.name}
+                                description={item.description}
+                                price={item.price}
+                                quantity={item.quantity}
+                                id={item.id}
+                            />
+                        )
+                    })
+                    : arrayProducts.map(item => {
+                        return (
+                            <ProductCard
+                                key={item.id}
+                                name={item.name}
+                                description={item.description}
+                                price={item.price}
+                                quantity={item.quantity}
+                                id={item.id}
+                            />
+                        )
+                    })
+                }
+            </div>
         </section>
     )
 }

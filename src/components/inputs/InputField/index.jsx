@@ -12,7 +12,9 @@ const InputField = ({ label, type, placeholder, value, action, name }) => {
                 <input
                     className="w-full min-h-[38px] border-standard border-border-color rounded-[4px] px-[10px] py-1 bg-transparent 
                     outline-none placeholder-placerhold-color text-base "
-                    type={type == "password" ? showPassword ? "text" : "password" : ''}
+                    type={type === "password" ? (showPassword ? "text" : "password")
+                        : (type === "number" ? "number" : "text")
+                    }
                     placeholder={placeholder}
                     value={value}
                     onChange={(e) => action((prev) => ({ ...prev, [name]: e.target.value }))}

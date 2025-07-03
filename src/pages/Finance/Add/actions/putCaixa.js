@@ -21,7 +21,6 @@ export const putCaixa = (user, { addCaixa, payment_type, client, addSheet }) => 
             return true
         })
         .catch((err) => {
-            console.log(err)
             return false
         })
 
