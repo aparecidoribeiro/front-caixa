@@ -14,7 +14,7 @@ const Unavailable = () => {
 
     if (verify.length === 0) {
         return (
-            <div className="flex flex-col gap-2 mt-4 items-center">
+            <div className="flex flex-col gap-2 mt-7 items-center">
                 <h1 className="flex items-center gap-1 text-sm text-center">
                     <CircleAlert size={16} /> Nenhum produto indisponível
                 </h1>

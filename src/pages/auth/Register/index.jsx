@@ -65,7 +65,7 @@ const Register = () => {
     }
 
     return (
-        <section className="min-h-screen flex items-center px-standard">
+        <section className="min-h-screen flex items-center">
             <form onSubmit={resgisterUser} className="w-full flex-col justify-center">
                 <h1 className="text-center text-3xl font-medium mb-2">Criar conta</h1>
                 <div className="flex flex-col gap-2 items-center">
