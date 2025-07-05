@@ -7,10 +7,7 @@ import Button from "@components/inputs/Button"
 import InputField from "@components/inputs/InputField"
 import LoadinBlock from "@components/alerts/LoadinBlock"
 
-import { validatePassword } from "@utils/validatePassword"
-import { validateEmail } from "@utils/validateEmail"
-import { validateInputs } from "@utils/validateInputs"
-import { comparePasswords } from "@utils/comparePasswords"
+import { validateInputs, validateEmail, comparePasswords, validatePassword } from "@utils/validate"
 
 import api from "@services/api"
 

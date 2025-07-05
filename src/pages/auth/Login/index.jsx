@@ -10,6 +10,9 @@ import api from "@services/api"
 //reducers
 import { login } from '@features/auth.js'
 
+import { validateEmail } from "@utils/validate"
+
+
 //Features loading
 import { setLoading } from '@features/loading.js'
 
@@ -36,7 +39,11 @@ const Login = () => {
 
         if (validateInputs()) {
             toast.error("Preencha todos os campos")
-        } else {
+        }
+        else if (!validateEmail(formData.email)) {
+            toast.error("O e-mail inserido não é válido")
+        }
+        else {
             dispatch(setLoading(true))
             await api({
                 method: 'post',
@@ -58,7 +65,6 @@ const Login = () => {
 
                 dispatch(login(dataUser))
             }).catch((err) => {
-                console.log(err)
                 dispatch(setLoading(false))
                 toast.error('Email ou senha incorreto')
             }).finally(() => {

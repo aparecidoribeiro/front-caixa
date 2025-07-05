@@ -7,10 +7,7 @@ import LoadinBlock from "@components/alerts/LoadinBlock"
 import api from "@services/api"
 
 //utils
-import { validatePassword } from "@utils/validatePassword"
-import { comparePasswords } from "@utils/comparePasswords"
-import { validateEmail } from "@utils/validateEmail"
-import { validateInputs } from "@utils/validateInputs"
+import { validateInputs, validateEmail, comparePasswords, validatePassword } from "@utils/validate"
 
 const Register = () => {
 

@@ -3,7 +3,7 @@ import InputField from "@components/inputs/InputField"
 import LoadinBlock from "@components/alerts/LoadinBlock"
 
 import { useState } from "react"
-import { validateEmail } from "@utils/validateEmail"
+import { validateEmail } from "@utils/validate"
 import api from "@services/api"
 import { toast } from "react-toastify"
 
