@@ -34,6 +34,17 @@ const Add = () => {
         }
     }
 
+    const clearInputs = () => {
+        setData({
+            image: null,
+            name: "",
+            description: "",
+            price: null,
+            quantity: "",
+            code: ""
+        })
+    }
+
     const createProdct = async (e) => {
         e.preventDefault()
 
@@ -52,6 +63,7 @@ const Add = () => {
                 toast.error("Erro ao criar produto, tente novamente")
             }
 
+            clearInputs()
             dispatch(setLoading(false))
         }
 
@@ -59,12 +71,12 @@ const Add = () => {
 
     const onFileChange = (e) => {
         const file = e.target.files[0].name
-        setData((prev) => ({...prev, image: file }))
+        setData((prev) => ({ ...prev, image: file }))
     }
 
     return (
-        <section className=" mt-5 pb-[54px] flex flex-col gap-5">
-            <h2 className="text-xl text-center mt-3">Adicione um novo produto</h2>
+        <div>
+            <h2 className="text-xl text-center mt-4 mb-5">Adicionar um novo produto</h2>
             <form
                 onSubmit={createProdct}
                 className="flex flex-col gap-5">
@@ -118,7 +130,7 @@ const Add = () => {
                     />
                 </div>
             </form>
-        </section>
+        </div>
     )
 }
 

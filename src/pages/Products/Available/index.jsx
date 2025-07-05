@@ -11,17 +11,18 @@ const Available = () => {
     const arrayProducts = [...products.data].reverse()
     const arrayFilter = [...products.filter].reverse()
 
-    {
-        arrayProducts.length === 0 && (
-            <h1 className="flex items-center gap-1 text-sm">
-                <CircleAlert size={16} /> Nenhum produto cadastrado
-            </h1>
-        )
-    }
 
-    return (
-        <section className="h-auto flex flex-col pb-[54px] gap-2 mt-5 items-center">
-            <div className="mb-5">
+    if (arrayProducts.length === 0) {
+        return (
+            <div className="flex flex-col gap-2 mt-4 items-center">
+                <h1 className="flex items-center gap-1 text-sm text-center">
+                    <CircleAlert size={16} /> Nenhum produto cadastrado
+                </h1>
+            </div>
+        )
+    } else {
+        return (
+            <div className="flex flex-col gap-2 mt-4 mb-4">
                 {arrayFilter.length > 0 ?
                     arrayFilter.map(item => {
                         return (
@@ -35,9 +36,9 @@ const Available = () => {
                             />
                         )
                     })
-                    : arrayProducts.map(item => {
-                        return (
-                            <ProductCard
+                    : arrayProducts.filter(item => item.quantity > 0)
+                        .map(item => (
+                            < ProductCard
                                 key={item.id}
                                 name={item.name}
                                 description={item.description}
@@ -45,12 +46,12 @@ const Available = () => {
                                 quantity={item.quantity}
                                 id={item.id}
                             />
-                        )
-                    })
+                        ))
                 }
             </div>
-        </section>
-    )
+        )
+    }
+
 }
 
 export default Available

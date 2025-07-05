@@ -5,14 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCart, removeCart, setQuantity } from "@features/cart";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
+import { deleteProduct } from "@utils/deleteProduct";
 
 
 
 const ProductCard = ({ name, description, price, quantity, id, quantitySelect }) => {
 
-    const dispatch = useDispatch()
     const cart = useSelector(state => state.cart.data)
     const products = useSelector(state => state.products.data)
+    const user = useSelector(state => state.auth.user)
+    const dispatch = useDispatch()
 
 
     const changeSelect = (e) => {
@@ -53,7 +55,7 @@ const ProductCard = ({ name, description, price, quantity, id, quantitySelect })
     return (
         <div className="w-full grid grid-cols-[1fr,3fr,1fr] grid-rows-1s gap-2 bg-white px-2 py-3">
             <div className="w-[70px] h-[70px] relative">
-                <DropdownMenu />
+                <DropdownMenu id={id} />
                 <img
                     className="w-full h-full object-cover"
                     src="../public/produto.webp"
@@ -75,7 +77,7 @@ const ProductCard = ({ name, description, price, quantity, id, quantitySelect })
             </div>
             <div className="flex flex-col items-center gap-1">
                 {!pathname ? <div className="text-center flex flex-col gap-1 w-[50px]">
-                    <p className="text-xs mt-2">{quantity > 0 ? `Disp: ${quantity}` : 'indisponivel'}</p>
+                    <p className="text-xs mt-2">{quantity > 0 ? `Disp: ${quantity}` : `Disp: ${quantity}`}</p>
                     {quantity > 0 ?
                         <button
                             className="bg-primary p-2 flex justify-center items-center rounded-[4px] h-7"
@@ -87,9 +89,10 @@ const ProductCard = ({ name, description, price, quantity, id, quantitySelect })
                             />
                         </button>
                         :
+                        //Botão de produto indisponível
                         <button
                             className="bg-black-one p-2 flex justify-center items-center rounded-[4px] w-full h-7"
-                            onClick={addCart}
+                            onClick={() => deleteProduct(user, id, dispatch)}
                         >
                             <Trash2
                                 size={18}
@@ -106,7 +109,11 @@ const ProductCard = ({ name, description, price, quantity, id, quantitySelect })
                         >
                             {
                                 Array.from({ length: quantity }, (_, i) => (
-                                    <option key={i + 1} value={i + 1}>{i + 1}</option>
+                                    <option
+                                        key={i + 1}
+                                        value={i + 1}
+                                    >{i + 1}
+                                    </option>
                                 ))
                             }
                         </select>

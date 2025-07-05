@@ -1,20 +1,45 @@
 import { EllipsisVertical } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { deleteProduct } from '@utils/deleteProduct';
 
-const DropdownMenu = () => {
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+
+const DropdownMenu = ({ id }) => {
+
+
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.auth.user)
+
     return (
         <div className='absolute top-0 right-0'>
-            < details className="dropdown" >
-                <summary className="btn p-0 h-auto border-none shadow-none bg-transparent ">
-                    <EllipsisVertical
+            <Menu>
+                <MenuButton>
+                    < EllipsisVertical
                         color="#393A3E"
                         size={22}
                     />
-                </summary>
-                <ul className="menu dropdown-content rounded-box z-1 w-auto p-2 shadow-sm text-white bg-black-one">
-                    <li><a>Editar</a></li>
-                    <li><a>Deletar</a></li>
-                </ul>
-            </details >
+                </MenuButton>
+                <MenuItems
+                    transition
+                    anchor="bottom"
+                    className="bg-black-one text-white rounded-md outline-none text-sm p-1"
+                >
+                    <MenuItem>
+                        <button className="flex w-full items-center rounded-md px-3 py-1 hover:bg-black-opacity focus:bg-black-opacity">
+                            Editar
+                        </button>
+                    </MenuItem>
+                    <MenuItem>
+                        <button
+                            onClick={() => deleteProduct(user, id, dispatch)}
+                            className="flex w-full items-center rounded-md px-3 py-1 hover:bg-black-opacity focus:bg-black-opacity"
+                        >
+                            Deletar
+                        </button>
+                    </MenuItem>
+                </MenuItems>
+            </Menu>
         </div>
     )
 }

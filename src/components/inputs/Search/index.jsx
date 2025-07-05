@@ -5,6 +5,7 @@ import { filterSearch } from '@utils/filterSearch';
 import { useDispatch } from 'react-redux';
 import { setFilter } from '@features/products';
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Search = () => {
 
@@ -13,6 +14,8 @@ const Search = () => {
     const [search, setSearch] = useState('')
 
     const arrayProducts = [...products]
+
+    const location = useLocation()
 
     const dispatch = useDispatch()
 
@@ -28,6 +31,10 @@ const Search = () => {
             dispatch(setFilter(resultFilter))
         }
     }, [search])
+
+    useEffect(() => {
+        setSearch('')
+    }, [location])
 
 
     return (
