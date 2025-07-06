@@ -6,6 +6,7 @@ import { deleteProduct } from '@utils/deleteProduct';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 
 import { Trash2, Pencil } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const DropdownMenu = ({ id }) => {
 
@@ -13,6 +14,8 @@ const DropdownMenu = ({ id }) => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.auth.user)
     const cart = useSelector(state => state.cart.data)
+
+    const navigate = useNavigate()
 
     return (
         <div className='absolute top-0 right-0'>
@@ -29,7 +32,9 @@ const DropdownMenu = ({ id }) => {
                     className="bg-black-one text-white rounded-md outline-none text-sm p-1"
                 >
                     <MenuItem>
-                        <button className="flex gap-1 w-full items-center rounded-md px-2 py-1 hover:bg-black-opacity focus:bg-black-opacity">
+                        <button
+                            className="flex gap-1 w-full items-center rounded-md px-2 py-1 hover:bg-black-opacity focus:bg-black-opacity"
+                            onClick={() => navigate(`/produtos/${id}`) }>
                             <Pencil size={14} />
                             Editar
                         </button>

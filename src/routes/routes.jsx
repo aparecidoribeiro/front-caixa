@@ -23,6 +23,7 @@ import Available from '../pages/Products/Available'
 import Unavailable from '../pages/Products/Unavailable'
 import Cart from '../pages/Products/Cart'
 import AddProducts from '../pages/Products/Add'
+import Edit from '../pages/Products/Edit'
 
 
 //Páginas de fichas
@@ -52,7 +53,8 @@ export const router = createBrowserRouter([
                     { index: true, element: <Available /> },
                     { path: 'indisponiveis', element: <Unavailable /> },
                     { path: 'carrinho', element: <Cart /> },
-                    { path: 'adicionar', element: <AddProducts /> }
+                    { path: 'adicionar', element: <AddProducts /> },
+                    { path: ':id', element: <Edit /> }
                 ]
             },
             {

@@ -1,6 +1,6 @@
 import Submenu from "@components/others/Submenu"
 import Search from "@components/inputs/Search"
-import { Outlet, useLocation } from "react-router-dom"
+import { Outlet, useLocation, useParams } from "react-router-dom"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { loadProducts } from "@utils/loadProducts"
@@ -8,6 +8,7 @@ import { setLoading } from "@features/loading"
 import { useDispatch } from "react-redux"
 
 const Products = () => {
+
 
     const options = [
         {
@@ -25,13 +26,15 @@ const Products = () => {
         }
     ]
 
+    const { id } = useParams()
+
     const dispatch = useDispatch()
 
-    const user = useSelector(state => state.auth.user)
+    const token = useSelector(state => state.auth.user.token)
     const products = useSelector(state => state.products.data)
 
     const fetchData = async () => {
-        await loadProducts(dispatch, user)
+        await loadProducts(dispatch, token)
         dispatch(setLoading(false))
     }
 
@@ -46,7 +49,7 @@ const Products = () => {
     }, [])
 
     const location = useLocation()
-    const hiddenRoutes = ['/produtos/carrinho']
+    const hiddenRoutes = ['/produtos/carrinho', `/produtos/${id}`]
     const pathname = !hiddenRoutes.includes(location.pathname)
 
     return (

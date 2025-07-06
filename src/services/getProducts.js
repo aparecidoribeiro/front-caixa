@@ -1,6 +1,6 @@
 import api from "@services/api"
 
-export const getProducts = async (user) => {
+export const getProducts = async (token) => {
 
     let currentPage = 1
     let lastPage = 1
@@ -13,7 +13,7 @@ export const getProducts = async (user) => {
                 url: `products?1=${currentPage}`,
                 headers: {
                     'Accept': 'application/json',
-                    'Authorization': `Bearer ${user.token}`,
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 }
             })

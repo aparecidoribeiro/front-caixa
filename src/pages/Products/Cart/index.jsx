@@ -38,7 +38,7 @@ const Cart = () => {
 
     return (
         <section className="pt-5">
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1 mb-7 '>
                 <X
                     size={28}
                     className='cursor-pointer'
@@ -48,7 +48,7 @@ const Cart = () => {
                 />
                 <h1 className='textarea-lg'>Carrinho de produtos</h1>
             </div>
-            <div className='mt-7 flex flex-col items-center gap-2'>
+            <div className='flex flex-col items-center gap-2'>
                 {cartProducts.length > 0 ?
                     cartProducts.map(item => {
                         return (

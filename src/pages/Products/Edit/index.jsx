@@ -1,15 +1,23 @@
-import InputField from "@components/inputs/InputField"
-import { useState } from "react"
+import { X } from "lucide-react"
+import { useNavigate, useParams } from "react-router-dom"
+import useNavigation from '@hooks/useNavigation';
 import InputNumberAlt from "@components/inputs/InputNumberAlt"
+import InputField from "@components/inputs/InputField"
 import Button from "@components/inputs/Button"
-import { toast } from "react-toastify"
-import { setLoading } from '@features/loading.js'
-import { putProducts } from '@services/putProducts'
-import { useSelector, useDispatch } from "react-redux"
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoading } from "@features/loading"
+import { patchProducts } from '@services/patchProducts'
 import { loadProducts } from "@utils/loadProducts"
-import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify";
 
-const Add = () => {
+const Edit = () => {
+
+    const { id } = useParams()
+    const { returnRoute } = useNavigation()
+
+    const products = useSelector(state => state.products.data)
+    const token = useSelector(state => state.auth.user.token)
 
     const [data, setData] = useState({
         image: null,
@@ -20,73 +28,71 @@ const Add = () => {
         code: ""
     })
 
-    const user = useSelector(state => state.auth.user)
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-
-
-    const verifyInpts = () => {
-        const values = data.name.trim() === "" || data.description.trim() === "" || data.price === null || data.quantity === ""
-
-        if (values) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    const clearInputs = () => {
-        setData({
-            image: null,
-            name: "",
-            description: "",
-            price: null,
-            quantity: "",
-            code: ""
-        })
-    }
-
-    const createProdct = async (e) => {
-        e.preventDefault()
-
-        const result = verifyInpts()
-
-        if (result) {
-            toast.error("Preencha todos os campos.")
-        } else {
-            dispatch(setLoading(true))
-            const response = await putProducts(user, data)
-
-            if (response) {
-                await loadProducts(dispatch, user)
-                navigate("/produtos")
-                toast.success("Produto criado com sucesso")
-            } else {
-                toast.error("Erro ao criar produto, tente novamente")
-            }
-
-            clearInputs()
-            dispatch(setLoading(false))
-        }
-
-    }
 
     const onFileChange = (e) => {
         const file = e.target.files[0].name
         setData((prev) => ({ ...prev, image: file }))
     }
 
+    useEffect(() => {
+
+        const searchProduct = products.find(product => product.id == id)
+
+        setData({
+            image: searchProduct.image_url,
+            name: searchProduct.name,
+            description: searchProduct.description,
+            price: searchProduct.price,
+            quantity: searchProduct.quantity,
+            code: searchProduct.code
+        })
+
+    }, [])
+
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const updateProduct = async (e) => {
+        e.preventDefault()
+
+        dispatch(setLoading(true))
+
+        const response = await patchProducts(id, token, data)
+
+        if (response.status === 200) {
+            await loadProducts(dispatch, token)
+            navigate('/produtos')
+            toast.success("Produto atualizado com sucesso")
+
+        } else {
+            toast.error(response.response.data.message || "Erro ao atualizar produto, tente novamente")
+        }
+
+        dispatch(setLoading(false))
+
+    }
+
     return (
-        <div>
-            <h2 className="text-xl text-center mt-4 mb-5">Adicionar um novo produto</h2>
+        <section className="pt-5">
+            <div className='flex items-center gap-1 mb-7'>
+                <X
+                    size={28}
+                    className='cursor-pointer'
+                    onClick={() => {
+                        returnRoute()
+                    }}
+                />
+                <h1 className='textarea-lg'>Editar produto</h1>
+            </div>
             <form
-                onSubmit={createProdct}
+                onSubmit={updateProduct}
                 className="flex flex-col gap-5">
                 <input
                     type="file"
                     className="file-input file-input-ghost file-input-md"
                     onChange={onFileChange} />
-                <div className="flex flex-col gap-2 mb-8">
+                <div className="flex flex-col gap-2 mb-5">
                     <InputField
                         type={"text"}
                         label={"Nome"}
@@ -132,8 +138,9 @@ const Add = () => {
                     />
                 </div>
             </form>
-        </div>
+        </section>
     )
+
 }
 
-export default Add
+export default Edit
