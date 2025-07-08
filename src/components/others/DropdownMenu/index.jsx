@@ -12,7 +12,7 @@ const DropdownMenu = ({ id }) => {
 
 
     const dispatch = useDispatch()
-    const user = useSelector(state => state.auth.user)
+    const token = useSelector(state => state.auth.user.token)
     const cart = useSelector(state => state.cart.data)
 
     const navigate = useNavigate()
@@ -29,11 +29,11 @@ const DropdownMenu = ({ id }) => {
                 <MenuItems
                     transition
                     anchor="bottom"
-                    className="bg-black-one text-white rounded-md outline-none text-sm p-1"
+                    className="bg-black-one text-white rounded-md outline-none text-sm py-1"
                 >
                     <MenuItem>
                         <button
-                            className="flex gap-1 w-full items-center rounded-md px-2 py-1 hover:bg-black-opacity focus:bg-black-opacity"
+                            className="flex gap-1 w-full items-center px-3 py-1 hover:bg-black-opacity focus:bg-black-opacity"
                             onClick={() => navigate(`/produtos/${id}`) }>
                             <Pencil size={14} />
                             Editar
@@ -41,8 +41,8 @@ const DropdownMenu = ({ id }) => {
                     </MenuItem>
                     <MenuItem>
                         <button
-                            onClick={() => deleteProduct(user, id, dispatch, cart)}
-                            className="flex gap-1 w-full items-center rounded-md px-2 py-1 hover:bg-black-opacity focus:bg-black-opacity"
+                            onClick={() => deleteProduct(token, id, dispatch, cart)}
+                            className="flex gap-1 w-full items-center px-3 py-1 hover:bg-black-opacity focus:bg-black-opacity"
                         >
                             <Trash2 size={14} />
                             Deletar

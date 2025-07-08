@@ -14,11 +14,14 @@ import { setLoading } from '@features/loading.js'
 import { useDispatch } from "react-redux";
 import { loadData } from '@utils/loadData';
 import { toast } from 'react-toastify';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Add = () => {
 
     const [valueSheet, setValueSheet] = useState(false)
     const { goHome } = useNavigation()
+
+    const navigate = useNavigate()
 
     const [data, setData] = useState({
         addCaixa: 0.00,
@@ -70,6 +73,21 @@ const Add = () => {
     }
 
 
+    //Rota de produtos
+    const location = useLocation().pathname
+    const isRoute = location == '/produtos/adicionar_caixa'
+    
+    const cartAmount = useSelector(state => state.cart.amount)
+
+    const [dataCart, setDataCart] = useState({
+        addCaixa: cartAmount,
+        payment_type: null,
+        client: null,
+        addSheet: "",
+        description: ""
+    })
+
+
     const addCash = async (e) => {
         e.preventDefault();
 
@@ -84,15 +102,14 @@ const Add = () => {
         await loadData(dispatch, user)
 
         if (response) {
+            clearInputs()
             toast.success("Valor adicionado ao caixa")
         } else {
             toast.error("Erro ao adicionar valor")
         }
 
-        clearInputs()
         dispatch(setLoading(false))
     }
-
 
     return (
         <section className='flex flex-col gap-5 pt-5'>
@@ -102,14 +119,16 @@ const Add = () => {
                         size={28}
                         className='cursor-pointer'
                         onClick={() => {
-                            goHome()
+                            navigate(-1)
                         }}
                     />
                     <h1 className='text-[22px] mt-4 leading-tight'>Qual é o valor que irá entrar no caixa?</h1>
                 </div>
                 <div className='flex flex-col justify-center gap-5 mt-5'>
                     <InputNumber
-                        value={data.addCaixa}
+                        value={
+                            isRoute ? dataCart.addCaixa : data.addCaixa
+                        }
                         name={'addCaixa'}
                         action={setData}
                         placeholder={"false"}

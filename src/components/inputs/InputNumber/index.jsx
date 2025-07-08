@@ -1,7 +1,12 @@
 import { NumericFormat } from "react-number-format"
+import { useLocation } from "react-router-dom"
 
 
 const InputNumber = ({ value, action, name }) => {
+
+    const location = useLocation().pathname
+    const isRoute = location == '/produtos/adicionar_caixa'
+
     return (
         <>
             <NumericFormat
@@ -20,6 +25,9 @@ const InputNumber = ({ value, action, name }) => {
                     action((prev) => ({ ...prev, [name]: values.floatValue }))
                 }}
                 placeholder={value == undefined && "R$0,00"}
+                displayType={
+                    isRoute ? "text" : "input"
+                }
             />
         </>
     )

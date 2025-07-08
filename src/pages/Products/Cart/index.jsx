@@ -8,6 +8,8 @@ import { NumericFormat } from 'react-number-format';
 import Button from '@components/inputs/Button';
 import { useDispatch } from 'react-redux';
 import { setAmount } from '@features/cart';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
 
@@ -17,6 +19,7 @@ const Cart = () => {
     const cartProducts = cart.data
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     //Array com o produtos que estão no carrinho
 
@@ -35,6 +38,16 @@ const Cart = () => {
 
         amountProducts()
     }, [cart])
+
+    const finalizeSale = () => {
+
+        if (cartProducts.length === 0) {
+            toast.error('Não possui nenhum produto no carrinho')
+        } else {
+            navigate('/produtos/adicionar_caixa')
+        }
+
+    }
 
     return (
         <section className="pt-5">
@@ -89,7 +102,7 @@ const Cart = () => {
                 </div>
                 <Button
                     text={'Finalizar venda'}
-                    action={() => console.log('Vendido')}
+                    action={finalizeSale}
                 />
             </div>
         </section>

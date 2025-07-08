@@ -10,6 +10,9 @@ import { setLoading } from "@features/loading"
 import { patchProducts } from '@services/patchProducts'
 import { loadProducts } from "@utils/loadProducts"
 import { toast } from "react-toastify";
+import { removeCart } from "@features/cart";
+import { validateInputs } from '@utils/validate'
+
 
 const Edit = () => {
 
@@ -18,6 +21,7 @@ const Edit = () => {
 
     const products = useSelector(state => state.products.data)
     const token = useSelector(state => state.auth.user.token)
+    const cart = useSelector(state => state.cart.data)
 
     const [data, setData] = useState({
         image: null,
@@ -27,6 +31,8 @@ const Edit = () => {
         quantity: "",
         code: ""
     })
+
+    const [originalData, setOriginalData] = useState(null)
 
 
     const onFileChange = (e) => {
@@ -38,38 +44,84 @@ const Edit = () => {
 
         const searchProduct = products.find(product => product.id == id)
 
-        setData({
+        const product = {
             image: searchProduct.image_url,
             name: searchProduct.name,
             description: searchProduct.description,
-            price: searchProduct.price,
+            price: Number(searchProduct.price),
             quantity: searchProduct.quantity,
             code: searchProduct.code
-        })
+        }
+
+        setData(product)
+
+        setOriginalData({ ...product })
 
     }, [])
 
+    useEffect(() => {
+
+    }, [])
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+
+    const verifyInputs = () => {
+        const values = data.name.trim() === "" || data.description.trim() === ""
+            || data.price === null || data.quantity === "" || data.code === ""
+
+        if (values) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    const verifyValues = () => {
+        return JSON.stringify(data) === JSON.stringify(originalData)
+    }
+
     const updateProduct = async (e) => {
         e.preventDefault()
 
-        dispatch(setLoading(true))
 
-        const response = await patchProducts(id, token, data)
-
-        if (response.status === 200) {
-            await loadProducts(dispatch, token)
-            navigate('/produtos')
-            toast.success("Produto atualizado com sucesso")
-
+        if (verifyInputs()) {
+            toast.error("Preencha todos os campos.")
+        } else if (verifyValues()) {
+            navigate(-1)
         } else {
-            toast.error(response.response.data.message || "Erro ao atualizar produto, tente novamente")
-        }
 
-        dispatch(setLoading(false))
+            dispatch(setLoading(true))
+
+            const response = await patchProducts(id, token, data)
+
+
+            if (response.status === 200) {
+                await loadProducts(dispatch, token)
+
+
+                if (data.quantity == 0) {
+
+                    const idNumber = Number(id)
+
+                    const searchCart = cart.find(product => product.item.id === idNumber)
+
+                    if (searchCart) {
+                        dispatch(removeCart(idNumber))
+                    }
+
+                }
+
+                navigate('/produtos')
+                toast.success("Produto atualizado com sucesso")
+
+            } else {
+                toast.error(response.response.data.message)
+            }
+
+            dispatch(setLoading(false))
+        }
 
     }
 

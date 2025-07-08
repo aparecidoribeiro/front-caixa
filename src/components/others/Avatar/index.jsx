@@ -13,17 +13,17 @@ const Avatar = () => {
                 <MenuButton className="outline-none">
                     <img
                         className="w-9 h-9 rounded-[50%] object-cover cursor-pointer"
-                        src={"./public/avatar.png"}
+                        src={"public/avatar.png"}
                         alt="Foto de perfil"
                     />
                 </MenuButton>
                 <MenuItems
                     transition
                     anchor="bottom start"
-                    className="bg-black-one text-white rounded-md outline-none text-sm p-1"
+                    className="bg-black-one text-white rounded-md outline-none text-sm py-1"
                 >
                     <MenuItem>
-                        <button className="flex gap-1 w-full items-center rounded-md px-2 py-1 hover:bg-black-opacity focus:bg-black-opacity">
+                        <button className="flex gap-1 w-full items-center px-3 py-1 hover:bg-black-opacity focus:bg-black-opacity">
                             <KeyRound size={14} />
                             Alterar senha
                         </button>
@@ -33,7 +33,7 @@ const Avatar = () => {
                             onClick={() => {
                                 dispatch(logout())
                             }}
-                            className="flex gap-1 w-full items-center rounded-md px-2 py-1 hover:bg-black-opacity focus:bg-black-opacity"
+                            className="flex gap-1 w-full items-center px-3 py-1 hover:bg-black-opacity focus:bg-black-opacity"
                         >
                             <LogOut size={14} />
                             Sair

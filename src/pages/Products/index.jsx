@@ -49,7 +49,7 @@ const Products = () => {
     }, [])
 
     const location = useLocation()
-    const hiddenRoutes = ['/produtos/carrinho', `/produtos/${id}`]
+    const hiddenRoutes = ['/produtos/carrinho', `/produtos/${id}`, '/produtos/adicionar_caixa']
     const pathname = !hiddenRoutes.includes(location.pathname)
 
     return (

@@ -13,7 +13,7 @@ const ProductCard = ({ name, description, price, quantity, id, quantitySelect })
 
     const cart = useSelector(state => state.cart.data)
     const products = useSelector(state => state.products.data)
-    const user = useSelector(state => state.auth.user)
+    const token = useSelector(state => state.auth.user.token)
     const dispatch = useDispatch()
 
 
@@ -42,11 +42,6 @@ const ProductCard = ({ name, description, price, quantity, id, quantitySelect })
         }
     }
 
-    //Função para deletar produto do carrinho
-    const delCart = () => {
-        dispatch(removeCart(id))
-    }
-
     const location = useLocation()
 
     const hiddenRoutes = ['/produtos/carrinho']
@@ -55,7 +50,8 @@ const ProductCard = ({ name, description, price, quantity, id, quantitySelect })
     return (
         <div className="w-full grid grid-cols-[1fr,3fr,1fr] grid-rows-1s gap-2 bg-white px-2 py-3">
             <div className="w-[70px] h-[70px] relative">
-                <DropdownMenu id={id} />
+                {!pathname && <DropdownMenu id={id} />}
+
                 <img
                     className="w-full h-full object-cover"
                     src="../public/produto.webp"
@@ -92,7 +88,7 @@ const ProductCard = ({ name, description, price, quantity, id, quantitySelect })
                         //Botão de produto indisponível
                         <button
                             className="bg-black-one p-2 flex justify-center items-center rounded-[4px] w-full h-7"
-                            onClick={() => deleteProduct(user, id, dispatch)}
+                            onClick={() => deleteProduct(token, id, dispatch, cart)}
                         >
                             <Trash2
                                 size={18}
@@ -119,7 +115,7 @@ const ProductCard = ({ name, description, price, quantity, id, quantitySelect })
                         </select>
                         <button
                             className="bg-black-one p-2 flex justify-center items-center rounded-[4px] w-full h-7"
-                            onClick={delCart}
+                            onClick={() => dispatch(removeCart(id))}
                         >
                             <Trash2
                                 size={18}

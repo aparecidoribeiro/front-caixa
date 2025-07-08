@@ -54,7 +54,8 @@ export const router = createBrowserRouter([
                     { path: 'indisponiveis', element: <Unavailable /> },
                     { path: 'carrinho', element: <Cart /> },
                     { path: 'adicionar', element: <AddProducts /> },
-                    { path: ':id', element: <Edit /> }
+                    { path: ':id', element: <Edit /> },
+                    { path: 'adicionar_caixa', element: <AddTransations /> },
                 ]
             },
             {

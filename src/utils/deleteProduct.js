@@ -5,18 +5,19 @@ import { toast } from "react-toastify";
 import { removeCart } from "@features/cart";
 
 
-export const deleteProduct = async (user, id, dispatch, cart) => {
+export const deleteProduct = async (token, id, dispatch, cart) => {
+
 
     dispatch(setLoading(true))
 
     const searchProduct = cart.find(product => product.item.id == id)
 
 
-    const response = await deleteProducts(user.token, id)
+    const response = await deleteProducts(token, id)
 
     if (response) {
 
-        await loadProducts(dispatch, user)
+        await loadProducts(dispatch, token)
 
         if (searchProduct) {
             dispatch(removeCart(id))

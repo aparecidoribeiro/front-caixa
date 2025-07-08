@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom"
 const Add = () => {
 
     const [data, setData] = useState({
-        image: null,
+        image_url: null,
         name: "",
         description: "",
         price: null,
@@ -20,13 +20,14 @@ const Add = () => {
         code: ""
     })
 
-    const user = useSelector(state => state.auth.user)
+    const token = useSelector(state => state.auth.user.token)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
 
     const verifyInpts = () => {
-        const values = data.name.trim() === "" || data.description.trim() === "" || data.price === null || data.quantity === ""
+        const values = data.name.trim() === "" || data.description.trim() === ""
+            || data.price === null || data.quantity.trim() === "" || data.code.trim() === "" || data.image === null
 
         if (values) {
             return true
@@ -35,45 +36,35 @@ const Add = () => {
         }
     }
 
-    const clearInputs = () => {
-        setData({
-            image: null,
-            name: "",
-            description: "",
-            price: null,
-            quantity: "",
-            code: ""
-        })
-    }
 
     const createProdct = async (e) => {
         e.preventDefault()
 
-        const result = verifyInpts()
-
-        if (result) {
+        if (verifyInpts()) {
             toast.error("Preencha todos os campos.")
         } else {
-            dispatch(setLoading(true))
-            const response = await putProducts(user, data)
 
-            if (response) {
-                await loadProducts(dispatch, user)
+            dispatch(setLoading(true))
+
+            const response = await putProducts(token, data)
+
+            if (response.status === 200) {
+                await loadProducts(dispatch, token)
                 navigate("/produtos")
                 toast.success("Produto criado com sucesso")
             } else {
-                toast.error("Erro ao criar produto, tente novamente")
+                console.log(response)
+                toast.error(response.response.data.message)
             }
 
-            clearInputs()
             dispatch(setLoading(false))
         }
 
     }
 
     const onFileChange = (e) => {
-        const file = e.target.files[0].name
-        setData((prev) => ({ ...prev, image: file }))
+        const file = e.target.files[0]
+        setData((prev) => ({ ...prev, image_url: file }))
     }
 
     return (
