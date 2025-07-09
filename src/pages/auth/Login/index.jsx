@@ -62,14 +62,13 @@ const Login = () => {
                     expiration: response.data.expiration
                 }
 
+                setFormData({ email: "", password: "" })
 
                 dispatch(login(dataUser))
             }).catch((err) => {
                 console.log(err)
                 dispatch(setLoading(false))
                 toast.error('Email ou senha incorreto')
-            }).finally(() => {
-                setFormData({ email: "", password: "" })
             })
         }
     }

@@ -28,6 +28,7 @@ import Edit from '../pages/Products/Edit'
 
 //Páginas de fichas
 import Sheet from '../pages/Sheet'
+import Clients from '../pages/Sheet/Clients'
 
 export const router = createBrowserRouter([
     {
@@ -61,7 +62,10 @@ export const router = createBrowserRouter([
             {
                 path: 'fichas',
                 element: <Sheet />,
-                loader: authLoader
+                loader: authLoader,
+                children: [
+                    { index: true, element: <Clients /> },
+                ]
             },
             {
                 path: '/login',

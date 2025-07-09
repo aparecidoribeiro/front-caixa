@@ -1,6 +1,6 @@
 import api from "@services/api"
 
-export const putProducts = (token, { name, description, code, price, quantity, image_url }) => {
+export const putProducts = (token, { name, description, code, price, quantity, image }) => {
 
     const formData = new FormData()
 
@@ -9,16 +9,16 @@ export const putProducts = (token, { name, description, code, price, quantity, i
     formData.append('price', price)
     formData.append('code', code)
     formData.append('quantity', quantity)
-    formData.append('image_url', image_url)
-
+    formData.append('image', image)
 
     return api({
         method: 'put',
         url: 'products',
-        formData,
+        data: formData,
         headers: {
             'Accept': 'application/json',
             'Authorization': `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
         },
     }).then((response) => {
         return response

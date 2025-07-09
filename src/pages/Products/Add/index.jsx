@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom"
 const Add = () => {
 
     const [data, setData] = useState({
-        image_url: null,
+        image: null,
         name: "",
         description: "",
         price: null,
@@ -64,7 +64,7 @@ const Add = () => {
 
     const onFileChange = (e) => {
         const file = e.target.files[0]
-        setData((prev) => ({ ...prev, image_url: file }))
+        setData((prev) => ({ ...prev, image: file }))
     }
 
     return (
@@ -75,6 +75,7 @@ const Add = () => {
                 className="flex flex-col gap-5">
                 <input
                     type="file"
+                    accept="image/*"
                     className="file-input file-input-ghost file-input-md"
                     onChange={onFileChange} />
                 <div className="flex flex-col gap-2 mb-8">

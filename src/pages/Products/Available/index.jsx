@@ -9,7 +9,8 @@ const Available = () => {
 
 
     const arrayProducts = [...products.data].reverse()
-    const arrayFilter = [...products.filter].reverse()
+    const search = useSelector(state => state.search.filter)
+    const arrayFilter = [...search].reverse()
 
 
     if (arrayProducts.length === 0) {

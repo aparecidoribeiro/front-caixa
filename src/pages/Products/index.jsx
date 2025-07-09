@@ -60,9 +60,9 @@ const Products = () => {
                     <Submenu options={options} />
                 </div>
             )}
-            <section className="h-auto pb-[54px] gap-2 ">
+            <div className="h-auto pb-[54px] gap-2 ">
                 <Outlet />
-            </section>
+            </div>
         </section>
     )
 }

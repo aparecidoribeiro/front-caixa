@@ -48,7 +48,7 @@ const ProductCard = ({ name, description, price, quantity, id, quantitySelect })
     const pathname = hiddenRoutes.includes(location.pathname)
 
     return (
-        <div className="w-full grid grid-cols-[1fr,3fr,1fr] grid-rows-1s gap-2 bg-white px-2 py-3">
+        <div className="w-full grid grid-cols-[1fr,3fr,1fr] grid-rows-1 bg-white gap-2 px-2 py-3 rounded-lg">
             <div className="w-[70px] h-[70px] relative">
                 {!pathname && <DropdownMenu id={id} />}
 

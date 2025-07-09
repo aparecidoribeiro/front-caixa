@@ -5,8 +5,9 @@ import { CircleAlert } from "lucide-react"
 const Unavailable = () => {
 
     const products = useSelector(state => state.products)
+    const search = useSelector(state => state.search.filter)
     const arrayProducts = [...products.data].reverse()
-    const arrayFilter = [...products.filter].reverse()
+    const arrayFilter = [...search].reverse()
 
 
     const verify = arrayProducts.filter(item => item.quantity === 0)
