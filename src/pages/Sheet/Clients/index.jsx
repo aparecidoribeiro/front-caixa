@@ -30,6 +30,7 @@ const Clients = () => {
                                     name={item.name}
                                     phone={item.phone}
                                     date={item.created_at}
+                                    id={item.id}
                                 />
 
                             )
@@ -41,6 +42,7 @@ const Clients = () => {
                                     name={item.name}
                                     phone={item.phone}
                                     date={item.created_at}
+                                    id={item.id}
                                 />
 
                             )

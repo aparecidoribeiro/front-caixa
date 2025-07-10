@@ -32,6 +32,7 @@ const Sheet = () => {
     }
 
     useEffect(() => {
+        dispatch(setLoading(true))
         if (clients.length === 0) {
             fetchClients()
         } else {

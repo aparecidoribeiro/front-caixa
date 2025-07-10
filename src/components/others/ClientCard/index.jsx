@@ -1,14 +1,48 @@
 import { Trash2 } from "lucide-react"
 import { format, parseISO } from 'date-fns';
 import { ptBR } from "date-fns/locale";
+import { useNavigate } from "react-router-dom";
 
-const ClientCard = ({ name, phone, date }) => {
+import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import { setLoading } from '@features/loading.js'
+import { loadClients } from '@utils/loadClients'
+import { toast } from "react-toastify";
+import { deleteClients } from '@services/deleteClients'
+
+const ClientCard = ({ name, phone, date, id }) => {
 
     const formatteObject = parseISO(date)
     const formatteDate = format(formatteObject, "dd 'de' MMMM", { locale: ptBR })
 
+
+    const token = useSelector(state => state.auth.user.token)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const removeClient = async (e) => {
+        e.stopPropagation()
+        dispatch(setLoading(true))
+
+        const response = await deleteClients(token, id)
+
+        if (response.status === 200) {
+            await loadClients(dispatch, token)
+            navigate("/fichas")
+            toast.success("Ficha deletada com sucesso")
+        } else {
+            toast.error(response.response.data.message)
+        }
+
+        dispatch(setLoading(false))
+
+    }
+
     return (
-        <div className="w-full bg-white px-3 py-3 rounded-lg grid grid-cols-[3fr,auto] grid-rows-1">
+        <div
+            className="w-full bg-white px-3 py-3 rounded-lg grid grid-cols-[3fr,auto] grid-rows-1"
+            onClick={() => navigate(`/fichas/${id}`)}
+        >
             <div>
                 <h2 className="text-base font-medium">{name}</h2>
                 <h3 className="text-sm font-normal">{phone}</h3>
@@ -16,8 +50,8 @@ const ClientCard = ({ name, phone, date }) => {
             </div>
             <div className="self-center">
                 <button
-                    className="bg-black-one p-2 flex justify-center items-center rounded-[4px] w-[50px] h-7"
-                    onClick={() => console.log("Deletar")}
+                    className="bg-black-one p-2 flex justify-center items-center rounded-[4px] w-[50px] h-7 "
+                    onClick={removeClient}
                 >
                     <Trash2
                         size={18}

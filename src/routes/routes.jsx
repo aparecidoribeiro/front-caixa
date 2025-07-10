@@ -29,6 +29,8 @@ import Edit from '../pages/Products/Edit'
 //Páginas de fichas
 import Sheet from '../pages/Sheet'
 import Clients from '../pages/Sheet/Clients'
+import AddClients from '../pages/Sheet/Add'
+import Profile from '../pages/Sheet/Profile'
 
 export const router = createBrowserRouter([
     {
@@ -65,6 +67,8 @@ export const router = createBrowserRouter([
                 loader: authLoader,
                 children: [
                     { index: true, element: <Clients /> },
+                    { path: 'adicionar', element: <AddClients /> },
+                    { path: ':id', element: <Profile /> },
                 ]
             },
             {
