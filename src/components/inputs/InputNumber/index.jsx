@@ -11,7 +11,7 @@ const InputNumber = ({ value, action, name }) => {
         <>
             <NumericFormat
                 className='text-5xl font-extrabold w-full text-center
-                outline-none bg-transparent placeholder:text-black-one'
+                outline-none bg-transparent placeholder:text-black-one mb-2'
                 prefix={"R$"}
                 decimalSeparator={","}
                 thousandSeparator={"."}
@@ -24,7 +24,7 @@ const InputNumber = ({ value, action, name }) => {
                 onValueChange={(values) => {
                     action((prev) => ({ ...prev, [name]: values.floatValue }))
                 }}
-                placeholder={value == undefined && "R$0,00"}
+                placeholder={value == "false" && "R$0,00"}
                 displayType={
                     isRoute ? "text" : "input"
                 }

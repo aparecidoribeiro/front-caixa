@@ -1,6 +1,6 @@
 import api from '@services/api'
 
-export const patchProducts = (id, token, { name, description, code, price, quantity }) => {
+export const patchProducts = (id, token, { name, description, code, price, quantity, image }) => {
 
     return api({
         method: 'patch',
@@ -8,8 +8,9 @@ export const patchProducts = (id, token, { name, description, code, price, quant
         headers: {
             'Accept': 'application/json',
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'multipart/form-data'
         }, data: {
+            image: image,
             name: name,
             description: description,
             code: Number(code),

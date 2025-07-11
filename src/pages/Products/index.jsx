@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"
 import { loadProducts } from "@utils/loadProducts"
 import { setLoading } from "@features/loading"
 import { useDispatch } from "react-redux"
+import { loadClients } from '@utils/loadClients'
 
 const Products = () => {
 
@@ -32,6 +33,8 @@ const Products = () => {
 
     const token = useSelector(state => state.auth.user.token)
     const products = useSelector(state => state.products.data)
+    const clients = useSelector(state => state.clients.data)
+
 
     const fetchData = async () => {
         await loadProducts(dispatch, token)
@@ -43,6 +46,20 @@ const Products = () => {
 
         if (products.length === 0) {
             fetchData()
+        } else {
+            dispatch(setLoading(false))
+        }
+    }, [])
+
+    const fetchClients = async () => {
+        await loadClients(dispatch, token)
+        dispatch(setLoading(false))
+    }
+
+    useEffect(() => {
+        dispatch(setLoading(true))
+        if (clients.length === 0) {
+            fetchClients()
         } else {
             dispatch(setLoading(false))
         }

@@ -1,6 +1,5 @@
 import { X } from 'lucide-react';
 import { useState } from 'react';
-import useNavigation from '@hooks/useNavigation';
 import InputNumber from '@components/inputs/InputNumber';
 import InputSelect from '@components/inputs/InputSelect';
 import InputField from '@components/inputs/InputField';
@@ -15,19 +14,22 @@ import { useDispatch } from "react-redux";
 import { loadData } from '@utils/loadData';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Add = () => {
 
     const [valueSheet, setValueSheet] = useState(false)
-    const { goHome } = useNavigation()
-
+    const user = useSelector(state => state.auth.user)
+    const clients = useSelector(state => state.clients.data)
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const [data, setData] = useState({
-        addCaixa: 0.00,
+        addCaixa: 0,
+        otherAmount: null,
         payment_type: null,
         client: null,
-        addSheet: "",
+        addSheet: null,
         description: ""
     })
 
@@ -48,15 +50,6 @@ const Add = () => {
         { value: 'card', label: 'Cartão' }
     ]
 
-    const optionsClients = [
-        { id: '1', label: 'Aparecido' },
-        { id: '2', label: 'Luiza' },
-        { id: '3', label: 'Fabiana' }
-    ]
-
-    const user = useSelector(state => state.auth.user)
-
-    const dispatch = useDispatch()
 
     const verifyInputs = () => {
         if (!valueSheet) {
@@ -65,7 +58,7 @@ const Add = () => {
             }
             return true
         } else {
-            if (data.addCaixa === 0 || data.payment_type === null || data.client === null || data.addSheet === "" || data.description === "") {
+            if (data.addCaixa === 0 || data.payment_type === null || data.client === null || data.addSheet === null || data.description === "") {
                 return "Preencha todos os campos."
             }
             return true
@@ -73,19 +66,48 @@ const Add = () => {
     }
 
 
+    const optionsClients = clients.map(item => ({
+        id: item.id,
+        label: item.name
+    }))
+
     //Rota de produtos
     const location = useLocation().pathname
     const isRoute = location == '/produtos/adicionar_caixa'
-    
+
     const cartAmount = useSelector(state => state.cart.amount)
 
     const [dataCart, setDataCart] = useState({
         addCaixa: cartAmount,
         payment_type: null,
         client: null,
-        addSheet: "",
+        addSheet: null,
         description: ""
     })
+
+    const [otherAmount, setOtherAmount] = useState({
+        amount: null
+    })
+
+    useEffect(() => {
+
+        if (otherAmount.amount != null || otherAmount.amount != undefined) {
+
+            const newAmount = otherAmount.amount + cartAmount
+
+            setDataCart(prev => ({
+                ...prev,
+                addCaixa: newAmount
+            }))
+        } else if (otherAmount.amount == null) {
+            const newAmount = 0 + cartAmount
+            setDataCart(prev => ({
+                ...prev,
+                addCaixa: newAmount
+            }))
+        }
+
+    }, [otherAmount])
 
 
     const addCash = async (e) => {
@@ -111,6 +133,16 @@ const Add = () => {
         dispatch(setLoading(false))
     }
 
+    // useEffect(() => {
+    //     if (data.addSheet > dataCart.addCaixa) {
+    //         toast.error("O valor da ficha supera o que irá entrar no caixa")
+    //         setData(prev => ({
+    //             ...prev, 
+    //             addSheet: null
+    //         }))
+    //     }
+    // }, [data.addSheet])
+
     return (
         <section className='flex flex-col gap-5 pt-5'>
             <form onSubmit={addCash}>
@@ -124,7 +156,7 @@ const Add = () => {
                     />
                     <h1 className='text-[22px] mt-4 leading-tight'>Qual é o valor que irá entrar no caixa?</h1>
                 </div>
-                <div className='flex flex-col justify-center gap-5 mt-5'>
+                <div className='flex flex-col justify-center gap-3 mt-5'>
                     <InputNumber
                         value={
                             isRoute ? dataCart.addCaixa : data.addCaixa
@@ -141,6 +173,15 @@ const Add = () => {
                         name={'payment_type'}
                         action={setData}
                     />
+                    {isRoute && (
+                        <InputNumberAlt
+                            label={"Valor de outro procedimento"}
+                            placeholder={"R$0,00"}
+                            value={otherAmount.amount}
+                            name={'amount'}
+                            action={setOtherAmount}
+                        />
+                    )}
                 </div>
                 <div className='flex flex-col gap-2'>
                     <div className='mt-4'>
@@ -172,7 +213,7 @@ const Add = () => {
                                 action={setData}
                             />
                             <InputNumberAlt
-                                label={"Quanto irá pra ficha"}
+                                label={"Quanto irá pra ficha?"}
                                 placeholder={"R$0,00"}
                                 value={data.addSheet}
                                 name={'addSheet'}

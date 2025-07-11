@@ -36,7 +36,7 @@ const Edit = () => {
 
 
     const onFileChange = (e) => {
-        const file = e.target.files[0].name
+        const file = e.target.files[0]
         setData((prev) => ({ ...prev, image: file }))
     }
 

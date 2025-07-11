@@ -66,7 +66,6 @@ const Login = () => {
 
                 dispatch(login(dataUser))
             }).catch((err) => {
-                console.log(err)
                 dispatch(setLoading(false))
                 toast.error('Email ou senha incorreto')
             })

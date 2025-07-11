@@ -1,7 +1,7 @@
 import { NumericFormat } from "react-number-format"
 
 
-const InputNumberAlt = ({ label, placeholder, value, name, action }) => {
+const InputNumberAlt = ({ label, placeholder, value, name, action, onChange }) => {
     return (
         <div className="relative flex flex-col w-full">
             <label>{label}</label>
@@ -21,6 +21,7 @@ const InputNumberAlt = ({ label, placeholder, value, name, action }) => {
                 onValueChange={(values) => {
                     action((prev) => ({ ...prev, [name]: values.floatValue }))
                 }}
+                onChange={onChange}
             />
         </div >
     )
