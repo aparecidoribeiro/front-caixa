@@ -1,22 +1,24 @@
 import api from '@services/api'
 
-export const patchProducts = (id, token, { name, description, code, price, quantity, image }) => {
+export const patchProducts = (id, token, data) => {
+
+    const formData = new FormData()
+
+    formData.append('name', data.name)
+    formData.append('description', data.description)
+    formData.append('price', data.price)
+    formData.append('code', data.code)
+    formData.append('quantity', data.quantity)
+    formData.append('image', data.image)
 
     return api({
         method: 'patch',
         url: `products/${id}`,
+        data: formData,
         headers: {
             'Accept': 'application/json',
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
-        }, data: {
-            image: image,
-            name: name,
-            description: description,
-            code: Number(code),
-            price: price,
-            quantity: Number((quantity))
-        }
+        },
     }).then((response) => {
         return response
     }).catch((err) => {

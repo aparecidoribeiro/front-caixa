@@ -12,7 +12,6 @@ const Available = () => {
     const search = useSelector(state => state.search.filter)
     const arrayFilter = [...search].reverse()
 
-
     if (arrayProducts.length === 0) {
         return (
             <div className="flex flex-col gap-2 mt-7 items-center">
@@ -34,6 +33,7 @@ const Available = () => {
                                 price={item.price}
                                 quantity={item.quantity}
                                 id={item.id}
+                                image={item.image_url}
                             />
                         )
                     })
@@ -46,6 +46,7 @@ const Available = () => {
                                 price={item.price}
                                 quantity={item.quantity}
                                 id={item.id}
+                                image={item.image_url}
                             />
                         ))
                 }

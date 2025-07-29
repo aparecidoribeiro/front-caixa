@@ -8,14 +8,12 @@ import { useLocation } from "react-router-dom";
 import { deleteProduct } from "@utils/deleteProduct";
 
 
-
-const ProductCard = ({ name, description, price, quantity, id, quantitySelect }) => {
+const ProductCard = ({ name, description, price, quantity, id, image, quantitySelect }) => {
 
     const cart = useSelector(state => state.cart.data)
     const products = useSelector(state => state.products.data)
     const token = useSelector(state => state.auth.user.token)
     const dispatch = useDispatch()
-
 
     const changeSelect = (e) => {
 
@@ -54,7 +52,7 @@ const ProductCard = ({ name, description, price, quantity, id, quantitySelect })
 
                 <img
                     className="w-full h-full object-cover"
-                    src="../public/produto.webp"
+                    src={`http://localhost/storage/${image}`}
                 />
             </div>
             <div className="grid grid-rows-[auto, auto, auto]">

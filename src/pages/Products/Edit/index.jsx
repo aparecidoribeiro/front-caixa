@@ -11,7 +11,6 @@ import { patchProducts } from '@services/patchProducts'
 import { loadProducts } from "@utils/loadProducts"
 import { toast } from "react-toastify";
 import { removeCart } from "@features/cart";
-import { validateInputs } from '@utils/validate'
 
 
 const Edit = () => {
@@ -33,7 +32,6 @@ const Edit = () => {
     })
 
     const [originalData, setOriginalData] = useState(null)
-
 
     const onFileChange = (e) => {
         const file = e.target.files[0]
@@ -118,6 +116,8 @@ const Edit = () => {
 
             } else {
                 toast.error(response.response.data.message)
+                console.log(response)
+
             }
 
             dispatch(setLoading(false))
@@ -142,6 +142,7 @@ const Edit = () => {
                 className="flex flex-col gap-5">
                 <input
                     type="file"
+                    accept="image/*"
                     className="file-input file-input-ghost file-input-md"
                     onChange={onFileChange} />
                 <div className="flex flex-col gap-2 mb-5">

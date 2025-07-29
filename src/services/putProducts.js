@@ -1,24 +1,24 @@
 import api from "@services/api"
 
-export const putProducts = (token, { name, description, code, price, quantity, image }) => {
+export const putProducts = (token, data) => {
 
     const formData = new FormData()
 
-    formData.append('name', name)
-    formData.append('description', description)
-    formData.append('price', price)
-    formData.append('code', code)
-    formData.append('quantity', quantity)
-    formData.append('image', image)
+    formData.append('name', data.name)
+    formData.append('description', data.description)
+    formData.append('price', data.price)
+    formData.append('code', data.code)
+    formData.append('quantity', data.quantity)
+    formData.append('image', data.image)
+    formData.append('_method', "PUT")
 
     return api({
-        method: 'put',
+        method: 'post',
         url: 'products',
         data: formData,
         headers: {
             'Accept': 'application/json',
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
         },
     }).then((response) => {
         return response

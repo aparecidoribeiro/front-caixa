@@ -46,6 +46,7 @@ const Add = () => {
 
             dispatch(setLoading(true))
 
+
             const response = await putProducts(token, data)
 
             if (response.status === 200) {

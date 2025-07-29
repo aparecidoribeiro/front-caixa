@@ -11,7 +11,7 @@ function App() {
   const { id } = useParams()
 
   const hiddenRoutes = ['/login', '/register', '/reset-password', '/forgot',
-    '/adicionar', '/produtos/carrinho', `/produtos/${id}`, '/produtos/adicionar_caixa']
+    '/adicionar', '/produtos/carrinho', `/produtos/${id}`, '/produtos/adicionar_caixa', `/fichas/${id}`]
   const pathname = !hiddenRoutes.includes(location.pathname)
 
   const loading = useSelector(state => state.loading.value)

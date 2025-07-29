@@ -21,23 +21,8 @@ const Cart = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    //Array com o produtos que estão no carrinho
+    console.log(cart)
 
-    useEffect(() => {
-        const amountProducts = () => {
-            let amount = 0
-
-            cartProducts.forEach(item => {
-                const price = item.item.price
-                const quantity = item.quantity
-
-                amount += (price * quantity)
-            })
-            dispatch(setAmount(amount))
-        }
-
-        amountProducts()
-    }, [cart])
 
     const finalizeSale = () => {
 
@@ -73,6 +58,7 @@ const Cart = () => {
                                 quantity={item.item.quantity}
                                 id={item.item.id}
                                 quantitySelect={item.quantity}
+                                image={item.item.image_url}
                             />
                         )
                     })

@@ -5,18 +5,12 @@ import { logout } from "@features/auth"
 
 import api from "@services/api";
 
-import { useLocation, useNavigate } from "react-router-dom";
-
 
 const AuthAuthorization = ({ children }) => {
 
     const user = JSON.parse(localStorage.getItem('user'))
 
     const dispatch = useDispatch()
-
-
-    const location = useLocation()
-    const navigation = useNavigate()
 
 
     useEffect(() => {

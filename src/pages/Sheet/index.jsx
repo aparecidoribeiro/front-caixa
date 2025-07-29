@@ -1,6 +1,6 @@
 import Submenu from "@components/others/Submenu"
 import Search from "@components/inputs/Search"
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation, useParams } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { setLoading } from "@features/loading"
@@ -40,12 +40,20 @@ const Sheet = () => {
         }
     }, [])
 
+    const { id } = useParams()
+
+    const location = useLocation()
+    const hiddenRoutes = [`/fichas/${id}`]
+    const pathname = !hiddenRoutes.includes(location.pathname)
+
     return (
         <section>
-            <div>
-                <Search />
-                <Submenu options={options} />
-            </div>
+            {pathname && (
+                <div>
+                    <Search />
+                    <Submenu options={options} />
+                </div>
+            )}
             <div className="h-auto pb-[54px] gap-2 ">
                 <Outlet />
             </div>

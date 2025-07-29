@@ -34,7 +34,6 @@ import Profile from '../pages/Sheet/Profile'
 
 export const router = createBrowserRouter([
     {
-        path: '/',
         element: <App />,
         errorElement: <NotFound />,
         children: [
