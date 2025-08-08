@@ -10,9 +10,10 @@ export const patchProducts = (id, token, data) => {
     formData.append('code', data.code)
     formData.append('quantity', data.quantity)
     formData.append('image', data.image)
+    formData.append('_method', "PATCH")
 
     return api({
-        method: 'patch',
+        method: 'post',
         url: `products/${id}`,
         data: formData,
         headers: {

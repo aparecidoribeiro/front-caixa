@@ -19,8 +19,8 @@ function App() {
 
   return (
     <div className="px-standard bg-background">
-      {loading && <LoadinBlock />}
       <AuthAuthorization>
+        {loading && <LoadinBlock />}
         {pathname && <Header />}
         <div>
           <Outlet />

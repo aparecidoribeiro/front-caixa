@@ -1,5 +1,4 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { authLoader } from '../loaders/authLoader'
 
 import App from '../App'
 
@@ -32,6 +31,9 @@ import Clients from '../pages/Sheet/Clients'
 import AddClients from '../pages/Sheet/Add'
 import Profile from '../pages/Sheet/Profile'
 
+//Private Route
+import Private from './Private'
+
 export const router = createBrowserRouter([
     {
         element: <App />,
@@ -40,34 +42,31 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Finance />,
-                loader: authLoader,
                 children: [
-                    { index: true, element: <Today /> },
-                    { path: 'movimentacao', element: <Transaction /> },
-                    { path: 'adicionar', element: <AddTransations /> },
+                    { index: true, element: <Private><Today /></Private> },
+                    { path: 'movimentacao', element: <Private><Transaction /></Private> },
+                    { path: 'adicionar', element: <Private><AddTransations /></Private> },
                 ]
             },
             {
                 path: 'produtos',
                 element: <Products />,
-                loader: authLoader,
                 children: [
-                    { index: true, element: <Available /> },
-                    { path: 'indisponiveis', element: <Unavailable /> },
-                    { path: 'carrinho', element: <Cart /> },
-                    { path: 'adicionar', element: <AddProducts /> },
-                    { path: ':id', element: <Edit /> },
-                    { path: 'adicionar_caixa', element: <AddTransations /> },
+                    { index: true, element: <Private><Available /></Private> },
+                    { path: 'indisponiveis', element: <Private><Unavailable /> </Private> },
+                    { path: 'carrinho', element: <Private><Cart /></Private> },
+                    { path: 'adicionar', element: <Private><AddProducts /></Private> },
+                    { path: ':id', element: <Private><Edit /></Private> },
+                    { path: 'adicionar_caixa', element: <Private><AddTransations /></Private> },
                 ]
             },
             {
                 path: 'fichas',
                 element: <Sheet />,
-                loader: authLoader,
                 children: [
-                    { index: true, element: <Clients /> },
-                    { path: 'adicionar', element: <AddClients /> },
-                    { path: ':id', element: <Profile /> },
+                    { index: true, element: <Private><Clients /></Private> },
+                    { path: 'adicionar', element: <Private><AddClients /></Private> },
+                    { path: ':id', element: <Private><Profile /></Private> },
                 ]
             },
             {
