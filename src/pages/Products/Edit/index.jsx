@@ -9,8 +9,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setLoading } from "@features/loading"
 import { patchProducts } from '@services/patchProducts'
 import { loadProducts } from "@utils/loadProducts"
-import { toast } from "react-toastify";
 import { removeCart } from "@features/cart";
+import toast from "react-hot-toast";
 
 
 const Edit = () => {
@@ -85,7 +85,14 @@ const Edit = () => {
 
 
         if (verifyInputs()) {
-            toast.error("Preencha todos os campos.")
+            toast.error("Preencha todos os campos",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         } else if (verifyValues()) {
             navigate(-1)
         } else {
@@ -112,10 +119,24 @@ const Edit = () => {
                 }
 
                 navigate('/produtos')
-                toast.success("Produto atualizado com sucesso")
+                toast.success("Produto atualizado com sucesso",
+                    {
+                        style: {
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }
+                    }
+                )
 
             } else {
-                toast.error(response.response.data.message)
+                toast.error(response.response.data.message,
+                    {
+                        style: {
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }
+                    }
+                )
                 console.log(response)
 
             }

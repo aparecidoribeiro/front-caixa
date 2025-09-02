@@ -5,7 +5,7 @@ import LoadinBlock from "@components/alerts/LoadinBlock"
 import { useState } from "react"
 import { validateEmail } from "@utils/validate"
 import api from "@services/api"
-import { toast } from "react-toastify"
+import toast from "react-hot-toast"
 
 const Forgot = () => {
 
@@ -19,7 +19,14 @@ const Forgot = () => {
         e.preventDefault()
 
         if (!validateEmail(formData.email)) {
-            toast.error("Preencha todos os campos")
+            toast.error("Preencha todos os campos",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
         else {
             setLoagind(true)
@@ -31,10 +38,25 @@ const Forgot = () => {
                 }
             }).then((response) => {
                 console.log(response)
-                toast.success(response.data.message)
+                toast.success(response.data.message,
+                    {
+                        style: {
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }
+                    }
+                )
+
             }).catch((error) => {
                 console.log(error)
-                toast.error(error.response.data.error)
+                toast.error(error.response.data.error,
+                    {
+                        style: {
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }
+                    }
+                )
             }).finally(() => {
                 setLoagind(false)
                 setFormData({ email: "" })

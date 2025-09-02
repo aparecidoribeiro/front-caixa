@@ -9,7 +9,8 @@ import Button from '@components/inputs/Button';
 import { useDispatch } from 'react-redux';
 import { setAmount } from '@features/cart';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const Cart = () => {
 
@@ -18,17 +19,43 @@ const Cart = () => {
     const cart = useSelector(state => state.cart)
     const cartProducts = cart.data
 
+    const [amountTotal, setAmountTotal] = useState(0)
+
+    useEffect(() => {
+        console.log(cartProducts)
+
+        let totalAmount = 0
+
+        cartProducts.forEach(product => {
+
+            const price = Number(product.item.price)
+            const quantity = product.quantity
+
+            totalAmount += (price * quantity)
+
+        })
+
+        setAmountTotal(totalAmount)
+    }, [cartProducts])
+
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
-    console.log(cart)
 
 
     const finalizeSale = () => {
 
         if (cartProducts.length === 0) {
-            toast.error('Não possui nenhum produto no carrinho')
+            toast.error('Não possui nenhum produto no carrinho',
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         } else {
+            dispatch(setAmount(amountTotal))
             navigate('/produtos/adicionar_caixa')
         }
 
@@ -75,7 +102,7 @@ const Cart = () => {
                     <h3 className='text-sm'>Total dos produtos: <span>
                         <NumericFormat
                             className="font-medium"
-                            value={cart.amount}
+                            value={amountTotal}
                             prefix="R$"
                             decimalScale={2}
                             thousandSeparator="."

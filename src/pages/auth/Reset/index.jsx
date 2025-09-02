@@ -1,7 +1,6 @@
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { useEffect } from "react"
 import { useState } from "react"
-import { toast } from "react-toastify"
 
 import Button from "@components/inputs/Button"
 import InputField from "@components/inputs/InputField"
@@ -10,6 +9,7 @@ import LoadinBlock from "@components/alerts/LoadinBlock"
 import { validateInputs, validateEmail, comparePasswords, validatePassword } from "@utils/validate"
 
 import api from "@services/api"
+import toast from "react-hot-toast"
 
 
 const Reset = () => {
@@ -40,16 +40,44 @@ const Reset = () => {
         e.preventDefault()
 
         if (validateInputs(formData)) {
-            toast.error("Preencha todos os campos")
+            toast.error("Preencha todos os campos",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
         else if (!validateEmail(formData.email)) {
-            toast.error("O e-mail inserido não é válido")
+            toast.error("O e-mail inserido não é válido",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
         else if (!validatePassword(formData.password)) {
-            toast.error("Sua senha deve ter 8 caracteres, incluindo letras e números")
+            toast.error("Sua senha deve ter 8 caracteres, incluindo letras e números",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
         else if (!comparePasswords(formData)) {
-            toast.error("As senhas não coincide")
+            toast.error("As senhas não coincide",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
         else {
             setLoagind(true)
@@ -64,12 +92,26 @@ const Reset = () => {
                 }
             }).then((response) => {
                 console.log(response)
-                toast.success(response.data.message)
+                toast.success(response.data.message,
+                    {
+                        style: {
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }
+                    }
+                )
                 navigate('/login', { replace: true })
                 return
             }).catch((error) => {
                 console.log(error)
-                toast.error(error.response.data.error)
+                toast.error(error.response.data.error,
+                    {
+                        style: {
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }
+                    }
+                )
             }).finally(() => {
                 setLoagind(false)
                 setFormData({

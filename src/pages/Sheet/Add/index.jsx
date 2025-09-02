@@ -2,13 +2,13 @@ import InputField from "@components/inputs/InputField"
 import Button from "@components/inputs/Button"
 import { useState } from "react"
 import { PatternFormat } from "react-number-format"
-import { toast } from "react-toastify"
 import { putClients } from "@services/putClients"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { setLoading } from '@features/loading.js'
 import { loadClients } from '@utils/loadClients'
 import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 
 const Add = () => {
 
@@ -30,7 +30,14 @@ const Add = () => {
         e.preventDefault()
 
         if (verifyInpts()) {
-            toast.error("Preencha todos os campos.")
+            toast.error("Preencha todos os campos",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         } else {
             dispatch(setLoading(true))
 
@@ -39,9 +46,23 @@ const Add = () => {
             if (response.status === 200) {
                 await loadClients(dispatch, token)
                 navigate("/fichas")
-                toast.success("Ficha criada com sucesso")
+                toast.success("Ficha criada com sucesso",
+                    {
+                        style: {
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }
+                    }
+                )
             } else {
-                toast.error(response.response.data.message)
+                toast.error(response.response.data.message,
+                    {
+                        style: {
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }
+                    }
+                )
             }
 
             dispatch(setLoading(false))

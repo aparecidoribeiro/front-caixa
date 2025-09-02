@@ -7,8 +7,8 @@ import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { setLoading } from '@features/loading.js'
 import { loadClients } from '@utils/loadClients'
-import { toast } from "react-toastify";
 import { deleteClients } from '@services/deleteClients'
+import toast from "react-hot-toast";
 
 const ClientCard = ({ name, phone, date, id }) => {
 
@@ -29,9 +29,23 @@ const ClientCard = ({ name, phone, date, id }) => {
         if (response.status === 200) {
             await loadClients(dispatch, token)
             navigate("/fichas")
-            toast.success("Ficha deletada com sucesso")
+            toast.success("Ficha deletada com sucesso",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         } else {
-            toast.error(response.response.data.message)
+            toast.error(response.response.data.message,
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
 
         dispatch(setLoading(false))
@@ -40,7 +54,7 @@ const ClientCard = ({ name, phone, date, id }) => {
 
     return (
         <div
-            className="w-full bg-white px-3 py-3 rounded-lg grid grid-cols-[3fr,auto] grid-rows-1"
+            className="w-full bg-white px-3 py-3 rounded-lg grid grid-cols-[3fr,auto] grid-rows-1 cursor-pointer"
             onClick={() => navigate(`/fichas/${id}`)}
         >
             <div>

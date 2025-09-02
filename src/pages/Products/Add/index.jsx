@@ -2,12 +2,12 @@ import InputField from "@components/inputs/InputField"
 import { useState } from "react"
 import InputNumberAlt from "@components/inputs/InputNumberAlt"
 import Button from "@components/inputs/Button"
-import { toast } from "react-toastify"
 import { setLoading } from '@features/loading.js'
 import { putProducts } from '@services/putProducts'
 import { useSelector, useDispatch } from "react-redux"
 import { loadProducts } from "@utils/loadProducts"
 import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 
 const Add = () => {
 
@@ -41,7 +41,14 @@ const Add = () => {
         e.preventDefault()
 
         if (verifyInpts()) {
-            toast.error("Preencha todos os campos.")
+            toast.error("Preencha todos os campos",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         } else {
 
             dispatch(setLoading(true))
@@ -52,10 +59,24 @@ const Add = () => {
             if (response.status === 200) {
                 await loadProducts(dispatch, token)
                 navigate("/produtos")
-                toast.success("Produto criado com sucesso")
+                toast.success("Produto criado com sucesso",
+                    {
+                        style: {
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }
+                    }
+                )
             } else {
                 console.log(response)
-                toast.error(response.response.data.message)
+                toast.error(response.response.data.message,
+                    {
+                        style: {
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }
+                    }
+                )
             }
 
             dispatch(setLoading(false))

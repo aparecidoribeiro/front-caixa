@@ -12,9 +12,9 @@ import { useSelector } from 'react-redux';
 import { setLoading } from '@features/loading.js'
 import { useDispatch } from "react-redux";
 import { loadData } from '@utils/loadData';
-import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const Add = () => {
 
@@ -116,7 +116,14 @@ const Add = () => {
         const result = verifyInputs()
 
         if (result != true) {
-            return toast.error(result)
+            return toast.error(result,
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
         dispatch(setLoading(true))
 
@@ -125,9 +132,23 @@ const Add = () => {
 
         if (response) {
             clearInputs()
-            toast.success("Valor adicionado ao caixa")
+            toast.success("Valor adicionado ao caixa",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         } else {
-            toast.error("Erro ao adicionar valor")
+            toast.error("Erro ao adicionar valor",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
 
         dispatch(setLoading(false))

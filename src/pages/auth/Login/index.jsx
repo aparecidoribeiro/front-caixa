@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { toast } from "react-toastify"
 
 import Button from "@components/inputs/Button"
 import InputField from "@components/inputs/InputField"
@@ -15,6 +14,7 @@ import { validateEmail } from "@utils/validate"
 
 //Features loading
 import { setLoading } from '@features/loading.js'
+import toast from "react-hot-toast"
 
 
 const Login = () => {
@@ -38,10 +38,24 @@ const Login = () => {
         e.preventDefault();
 
         if (validateInputs()) {
-            toast.error("Preencha todos os campos")
+            toast.error("Preencha todos os campos",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
         else if (!validateEmail(formData.email)) {
-            toast.error("O e-mail inserido não é válido")
+            toast.error("O e-mail inserido não é válido",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
         else {
             dispatch(setLoading(true))
@@ -67,7 +81,14 @@ const Login = () => {
                 dispatch(login(dataUser))
             }).catch((err) => {
                 dispatch(setLoading(false))
-                toast.error('Email ou senha incorreto')
+                toast.error('Email ou senha incorreto',
+                    {
+                        style: {
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }
+                    }
+                )
             })
         }
     }

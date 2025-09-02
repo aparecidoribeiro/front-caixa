@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { toast } from "react-toastify"
 import Button from "@components/inputs/Button"
 import InputField from "@components/inputs/InputField"
 import AuthLink from "@components/links/AuthLink"
@@ -8,6 +7,7 @@ import api from "@services/api"
 
 //utils
 import { validateInputs, validateEmail, comparePasswords, validatePassword } from "@utils/validate"
+import toast from "react-hot-toast"
 
 const Register = () => {
 
@@ -26,16 +26,44 @@ const Register = () => {
         e.preventDefault()
 
         if (validateInputs(formData)) {
-            toast.error("Preencha todos os campos")
+            toast.error("Preencha todos os campos",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
         else if (!validateEmail(formData.email)) {
-            toast.error("O e-mail inserido não é válido")
+            toast.error("O e-mail inserido não é válido",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
         else if (!validatePassword(formData.password)) {
-            toast.error("Sua senha deve ter 8 caracteres, incluindo letras e números")
+            toast.error("Sua senha deve ter 8 caracteres, incluindo letras e números",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
         else if (!comparePasswords(formData)) {
-            toast.error("As senhas não coincide")
+            toast.error("As senhas não coincide",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
         else {
             setLoagind(true)
@@ -49,9 +77,23 @@ const Register = () => {
                     password_confirmation: formData.passwordConfirmation
                 }
             }).then((response) => {
-                toast.success("Usuário cadastrado com sucesso")
+                toast.success("Usuário cadastrado com sucesso",
+                    {
+                        style: {
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }
+                    }
+                )
             }).catch((error) => {
-                toast.error(error.response.data.error)
+                toast.error(error.response.data.error,
+                    {
+                        style: {
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }
+                    }
+                )
             }).finally(() => {
                 setLoagind(false)
                 setFormData({

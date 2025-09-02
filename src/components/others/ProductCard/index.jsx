@@ -3,9 +3,9 @@ import { ShoppingCart, Trash2 } from 'lucide-react';
 import DropdownMenu from "../DropdownMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { setCart, removeCart, setQuantity } from "@features/cart";
-import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import { deleteProduct } from "@utils/deleteProduct";
+import toast from "react-hot-toast";
 
 
 const ProductCard = ({ name, description, price, quantity, id, image, quantitySelect }) => {
@@ -33,7 +33,14 @@ const ProductCard = ({ name, description, price, quantity, id, image, quantitySe
         const verify = cart.some((item) => item.item.id === id)
 
         if (verify) {
-            toast.error("Esse produto já está no carrinho")
+            toast.error("Esse produto já está no carrinho",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         } else {
             const filter = products.filter(product => product.id == id)
             dispatch(setCart(...filter))
@@ -46,7 +53,7 @@ const ProductCard = ({ name, description, price, quantity, id, image, quantitySe
     const pathname = hiddenRoutes.includes(location.pathname)
 
     return (
-        <div className="w-full grid grid-cols-[1fr,3fr,1fr] grid-rows-1 bg-white gap-2 px-2 py-3 rounded-lg">
+        <div className="w-full grid grid-cols-[1fr,3fr,1fr] grid-rows-1 bg-white gap-2 px-2 py-3 rounded-lg cursor-pointer">
             <div className="w-[70px] h-[70px] relative">
                 {!pathname && <DropdownMenu id={id} />}
 
