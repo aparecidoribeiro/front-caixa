@@ -15,7 +15,6 @@ const cartSlice = createSlice({
             let product = { item: payload, quantity: 1 }
             newData.push(product)
             localStorage.setItem('cart', JSON.stringify(newData))
-            console.log(product)
         },
         removeCart: (state, { payload }) => {
             state.data = state.data.filter(product => product.item.id !== payload)
@@ -28,7 +27,7 @@ const cartSlice = createSlice({
             )
             localStorage.setItem('cart', JSON.stringify(state.data))
         },
-        setAmount: (state, {payload}) => {
+        setAmount: (state, { payload }) => {
             state.amount = payload
         }
     }

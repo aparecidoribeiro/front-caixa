@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { setLoading } from "@features/loading"
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { format, parseISO } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 const Profile = () => {
 
@@ -28,6 +30,8 @@ const Profile = () => {
 
     } else {
         dispatch(setLoading(false))
+        const dateUpdated = parseISO(client.updated_at)
+        const dateFormatted = format(dateUpdated, "d 'de' MMMM yyyy", { locale: ptBR })
         return (
             <section className="pt-5">
                 <div className='flex items-center gap-1 mb-7'>
@@ -42,10 +46,10 @@ const Profile = () => {
                 </div>
                 <div className="bg-white px-3 py-4 rounded-lg text-sm">
                     <div className="flex flex-col gap-1">
-                        <h2>Nome: {client.name}</h2>
-                        <h2>Telefone: {client.phone}</h2>
-                        <h2>Dívida: R$50,00</h2>
-                        <h2>Última atualização: {client.phone}</h2>
+                        <h2><strong>Nome:</strong> {client.name}</h2>
+                        <h2><strong>Telefone:</strong> {client.phone}</h2>
+                        <h2><strong>Dívida:</strong> R$50,00</h2>
+                        <h2><strong>Última atualização:</strong> {dateFormatted}</h2>
                     </div>
                 </div>
             </section>

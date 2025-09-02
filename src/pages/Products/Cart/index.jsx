@@ -22,7 +22,6 @@ const Cart = () => {
     const [amountTotal, setAmountTotal] = useState(0)
 
     useEffect(() => {
-        console.log(cartProducts)
 
         let totalAmount = 0
 

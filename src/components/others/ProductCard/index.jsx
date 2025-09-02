@@ -44,6 +44,14 @@ const ProductCard = ({ name, description, price, quantity, id, image, quantitySe
         } else {
             const filter = products.filter(product => product.id == id)
             dispatch(setCart(...filter))
+            toast.success("Produto adicionado ao carrinho",
+                {
+                    style: {
+                        backgroundColor: '#000',
+                        color: '#fff'
+                    }
+                }
+            )
         }
     }
 
